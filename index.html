@@ -1,519 +1,1193 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Smilla — Portfolio</title>
   <style>
     /* —— Design tokens (light/dark) —— */
-    :root{
-      --bg: #0b0c0f;          /* dark default */
+    :root {
+      --bg: #0b0c0f;
+      /* dark default */
       --panel: #12151b;
       --text: #e9eef6;
-      --muted:#a9b3c5;
-      --accent:#7ee787;       /* green */
-      --accent-2:#79c0ff;     /* blue */
-      --accent-3:#e2b3ff;     /* purple */
-      --card:#171b22;
-      --border:#242a35;
-      --chip:#1f2633;
-      --warning:#f7c948;
-      --danger:#ff6b6b;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --muted: #a9b3c5;
+      --accent: #7ee787;
+      /* green */
+      --accent-2: #79c0ff;
+      /* blue */
+      --accent-3: #e2b3ff;
+      /* purple */
+      --card: #171b22;
+      --border: #242a35;
+      --chip: #1f2633;
+      --warning: #f7c948;
+      --danger: #ff6b6b;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
     }
-    .light{
-      --bg:#f6f7fb; --panel:#ffffff; --text:#0d1117; --muted:#5b6577; --card:#ffffff; --border:#e7ebf3; --chip:#f0f3f9; --shadow: 0 10px 24px rgba(3,15,38,.08);
+
+    .light {
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --text: #0d1117;
+      --muted: #5b6577;
+      --card: #ffffff;
+      --border: #e7ebf3;
+      --chip: #f0f3f9;
+      --shadow: 0 10px 24px rgba(3, 15, 38, .08);
     }
 
     /* —— Base —— */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"}
-    img,video{display:block;max-width:100%;border-radius:14px}
-    a{color:var(--accent-2);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .container{max-width:1200px;margin:0 auto;padding:24px}
-    .hidden{display:none}
-    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+      border-radius: 14px
+    }
+
+    a {
+      color: var(--accent-2);
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px
+    }
+
+    .hidden {
+      display: none
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      white-space: nowrap
+    }
 
     /* —— Header —— */
-    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.0)), var(--panel);backdrop-filter: blur(6px);border-bottom:1px solid var(--border)}
-    .nav{display:flex;gap:16px;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent-2),var(--accent-3));box-shadow:var(--shadow)}
-    .brand h1{font-size:18px;margin:0}
-    .navlinks{display:flex;gap:14px}
-    .navlinks a{padding:10px 12px;border-radius:10px;background:transparent}
-    .navlinks a.active,.navlinks a:hover{background:var(--chip)}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .45), rgba(0, 0, 0, .0)), var(--panel);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .nav {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+      box-shadow: var(--shadow)
+    }
+
+    .brand h1 {
+      font-size: 18px;
+      margin: 0
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 14px
+    }
+
+    .navlinks a {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: transparent
+    }
+
+    .navlinks a.active,
+    .navlinks a:hover {
+      background: var(--chip)
+    }
 
     /* —— Hero —— */
-        .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:28px 0}
-        .hero .panel{background:var(--panel);border:1px solid var(--border);padding:24px;border-radius:18px;box-shadow:var(--shadow)}
-        .kpis{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px}
-        .kpi{background:var(--chip);border:1px solid var(--border);padding:10px 12px;border-radius:12px}
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      align-items: center;
+      padding: 28px 0
+    }
+
+    .hero .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 18px;
+      box-shadow: var(--shadow)
+    }
+
+    .kpis {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 18px
+    }
+
+    .kpi {
+      background: var(--chip);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 12px
+    }
 
     /* —— Controls —— */
-    .controls{position:static;top:64px;z-index:40;margin:6px 0 18px;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
-    .controls .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:14px 16px}
-    .chip{padding:8px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--border);cursor:pointer;display:inline-flex;gap:8px;align-items:center;font-size:14px}
-    .chip input{accent-color:var(--accent)}
-    select, .search{background:var(--card);color:var(--text);border:1px solid var(--border);padding:10px 12px;border-radius:12px}
-    .spacer{flex:1}
-    .toggle{border:1px solid var(--border);background:var(--card);padding:8px 10px;border-radius:12px;cursor:pointer}
+    .controls {
+      position: static;
+      top: 64px;
+      z-index: 40;
+      margin: 6px 0 18px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow)
+    }
+
+    .controls .row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 14px 16px
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 14px
+    }
+
+    .chip input {
+      accent-color: var(--accent)
+    }
+
+    select,
+    .search {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 12px
+    }
+
+    .spacer {
+      flex: 1
+    }
+
+    .toggle {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 8px 10px;
+      border-radius: 12px;
+      cursor: pointer
+    }
 
     /* —— Grid —— */
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .card{grid-column:span 4;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .08s ease}
-    .card:hover{transform:translateY(-2px)}
-    .media{aspect-ratio:16/10;background:linear-gradient(135deg,#263041,#1d2431);display:flex;align-items:center;justify-content:center;color:#9fb2d2;border-bottom:1px solid var(--border)}
-    .badge{position:absolute;margin:10px;padding:6px 8px;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);border:1px solid var(--border);border-radius:999px;font-size:12px}
-    .content{padding:14px 14px 16px}
-    .title{margin:0 0 6px;font-weight:600}
-    .meta{color:var(--muted);font-size:14px;margin-bottom:10px}
-    .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .tag{font-size:12px;background:var(--chip);border:1px solid var(--border);padding:6px 8px;border-radius:999px}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px
+    }
+
+    .card {
+      grid-column: span 4;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .08s ease
+    }
+
+    .card:hover {
+      transform: translateY(-2px)
+    }
+
+    .media {
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #263041, #1d2431);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9fb2d2;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .badge {
+      position: absolute;
+      margin: 10px;
+      padding: 6px 8px;
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px
+    }
+
+    .content {
+      padding: 14px 14px 16px
+    }
+
+    .title {
+      margin: 0 0 6px;
+      font-weight: 600
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .tag {
+      font-size: 12px;
+      background: var(--chip);
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      border-radius: 999px
+    }
 
     /* 2-up and 1-up on smaller viewports */
-    @media (max-width: 1024px){ .card{grid-column:span 6} .hero{grid-template-columns:1fr} }
-    @media (max-width: 640px){ .card{grid-column:span 12} }
+    @media (max-width: 1024px) {
+      .card {
+        grid-column: span 6
+      }
+
+      .hero {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        grid-column: span 12
+      }
+    }
 
     /* —— Modal —— */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter: blur(4px);display:none;align-items:center;justify-content:center;padding:24px}
-    .modal.open{display:flex}
-    .dialog{background:var(--panel);border:1px solid var(--border);border-radius:18px;max-width:1100px;width:100%;max-height:90vh;overflow:hidden;display:grid;grid-template-columns:1fr 380px}
-    .viewer{position:relative;padding:18px;border-right:1px solid var(--border)}
-    .viewer .frame{aspect-ratio:16/9;background:#0f131a;border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-    .viewer .nav{margin-top:12px;display:flex;gap:10px;justify-content:space-between}
-    .btn{padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer}
-    .details{padding:18px;overflow:auto}
-    .details h3{margin:0 0 8px}
-    .detail-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px
+    }
+
+    .modal.open {
+      display: flex
+    }
+
+    .dialog {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      max-width: 1100px;
+      width: 100%;
+      max-height: 90vh;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 380px
+    }
+
+    .viewer {
+      position: relative;
+      padding: 18px;
+      border-right: 1px solid var(--border)
+    }
+
+    .viewer .frame {
+      aspect-ratio: 16/9;
+      background: #0f131a;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .viewer .nav {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between
+    }
+
+    .btn {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      cursor: pointer
+    }
+
+    .details {
+      padding: 18px;
+      overflow: auto
+    }
+
+    .details h3 {
+      margin: 0 0 8px
+    }
+
+    .detail-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px
+    }
 
     /* —— Footer —— */
-    footer{margin:28px 0 42px;color:var(--muted)}
+    footer {
+      margin: 28px 0 42px;
+      color: var(--muted)
+    }
 
     /* —— Utility —— */
-    .pill{display:inline-flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;border:1px solid var(--border);background:var(--chip)}
-    .status{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid var(--border)}
-    .status.playable{background:rgba(126,231,135,.12);color:var(--accent)}
-    .status.wip{background:rgba(255, 214, 102, .12);color:var(--warning)}
-    .status.case{background:rgba(121,192,255,.12);color:var(--accent-2)}
+    .pill {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--chip)
+    }
+
+    .status {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border)
+    }
+
+    .status.playable {
+      background: rgba(126, 231, 135, .12);
+      color: var(--accent)
+    }
+
+    .status.wip {
+      background: rgba(255, 214, 102, .12);
+      color: var(--warning)
+    }
+
+    .status.case {
+      background: rgba(121, 192, 255, .12);
+      color: var(--accent-2)
+    }
 
     /* —— Simple icon placeholders —— */
-    .ico{width:18px;height:18px;display:inline-block}
-    .ico.grid{background:linear-gradient(90deg,#4f5b6e 33%,transparent 33% 66%,#4f5b6e 66%),linear-gradient(180deg,#4f5b6e 33%,transparent 33% 66%,#4f5b6e 66%)}
-    .ico.sun{background:radial-gradient(circle at 50% 50%, #eab308 45%, transparent 46%)}
-    .ico.moon{background:radial-gradient(circle at 50% 30%, #93c5fd 35%, transparent 36%), radial-gradient(circle at 60% 60%, #bfdbfe 15%, transparent 16%)}
+    .ico {
+      width: 18px;
+      height: 18px;
+      display: inline-block
+    }
+
+    .ico.grid {
+      background: linear-gradient(90deg, #4f5b6e 33%, transparent 33% 66%, #4f5b6e 66%), linear-gradient(180deg, #4f5b6e 33%, transparent 33% 66%, #4f5b6e 66%)
+    }
+
+    .ico.sun {
+      background: radial-gradient(circle at 50% 50%, #eab308 45%, transparent 46%)
+    }
+
+    .ico.moon {
+      background: radial-gradient(circle at 50% 30%, #93c5fd 35%, transparent 36%), radial-gradient(circle at 60% 60%, #bfdbfe 15%, transparent 16%)
+    }
 
     .hero {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-}
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
 
-.slideshow {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
+    .slideshow {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
 
-.slide-track {
-  display: flex;
-  width: calc(250px * 10);
-  animation: scroll 40s linear infinite;
-}
+    .slide-track {
+      display: flex;
+      width: calc(250px * 10);
+      animation: scroll 40s linear infinite;
+    }
 
-.slide-track img {
-  width: 250px;
-  height: 300px;
-  object-fit: cover;
-}
+    .slide-track img {
+      width: 250px;
+      height: 300px;
+      object-fit: cover;
+    }
 
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-250px * 5)); }
-}
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
 
-.profile-overlay {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3); /* leicht abdunkeln */
-  color: #fff;
-  text-align: left;
-  padding: 0 20px;
-}
+      100% {
+        transform: translateX(calc(-250px * 5));
+      }
+    }
 
-.profile-pic {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #fff;
-}
+    .profile-overlay {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      /* leicht abdunkeln */
+      color: #fff;
+      text-align: left;
+      padding: 0 20px;
+    }
 
-.about-text {
-  max-width: 500px;
-}
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #fff;
+    }
+
+    .about-text {
+      max-width: 500px;
+    }
 
 
-.modal { 
-  position: fixed; inset: 0; 
-  padding: 4vh 4vw;                 /* weniger Rand, mehr Platz */
-  z-index: 10000;                    /* über allem */
-}
-.modal.open { display: flex; align-items: center; justify-content: center; }
+    .modal {
+      position: fixed;
+      inset: 0;
+      padding: 4vh 4vw;
+      /* weniger Rand, mehr Platz */
+      z-index: 10000;
+      /* über allem */
+    }
 
-.modal .dialog {
-  width: 100%;
-  max-width: 1600px;                 /* vorher 1100px – jetzt breiter */
-  height: 92vh;                      /* höher */
-  max-height: none;                  /* Deckel weg */
-  border-radius: 14px;
-  display: grid;
-  grid-template-columns: minmax(0, 2.2fr) minmax(320px, 1fr); /* breitere Medienfläche */
-}
+    .modal.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-/* Medien-Viewer höher machen */
-.modal .viewer { padding: 16px; border-right: 1px solid var(--border); }
-.modal .viewer .frame {
-  height: calc(92vh - 140px);        /* nutzt fast die gesamte Höhe für Medien */
-  aspect-ratio: auto;                /* nicht auf 16:9 fixieren */
-}
+    .modal .dialog {
+      width: 100%;
+      max-width: 1600px;
+      /* vorher 1100px – jetzt breiter */
+      height: 92vh;
+      /* höher */
+      max-height: none;
+      /* Deckel weg */
+      border-radius: 14px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(320px, 1fr);
+      /* breitere Medienfläche */
+    }
 
-/* Sidebar scrollt, wenn viel Text */
-.modal .details { overflow: auto; }
+    /* Medien-Viewer höher machen */
+    .modal .viewer {
+      padding: 16px;
+      border-right: 1px solid var(--border);
+    }
 
-/* Mobile: echtes Vollbild */
-@media (max-width: 900px){
-  .modal { padding: 0; }
-  .modal .dialog {
-    height: 100vh; max-width: none; border-radius: 0;
-    grid-template-columns: 1fr;      /* eine Spalte */
-  }
-  .modal .viewer .frame { height: 56vh; }
-}
-/* Nur About-Modal kleiner machen */
+    .modal .viewer .frame {
+      height: calc(92vh - 140px);
+      /* nutzt fast die gesamte Höhe für Medien */
+      aspect-ratio: auto;
+      /* nicht auf 16:9 fixieren */
+    }
+
+    /* Sidebar scrollt, wenn viel Text */
+    .modal .details {
+      overflow: auto;
+    }
+
+    /* Mobile: echtes Vollbild */
+    @media (max-width: 900px) {
+      .modal {
+        padding: 0;
+      }
+
+      .modal .dialog {
+        height: 100vh;
+        max-width: none;
+        border-radius: 0;
+        grid-template-columns: 1fr;
+        /* eine Spalte */
+      }
+
+      .modal .viewer .frame {
+        height: 56vh;
+      }
+    }
+
+    /* Nur About-Modal kleiner machen */
+    #aboutModal .dialog {
+      max-width: 600px;
+      /* Breiter = größer, schmaler = kleiner */
+      width: 90vw;
+      max-height: 80vh;
+      grid-template-columns: 1fr;
+      /* nur eine Spalte */
+    }
+
+    /* Prev/Next Buttons im Projekt-Modal */
+    .modal .nav .btn {
+      background-color: #3a7bd5;
+      /* mittleres Blau */
+      color: white;
+      border: none;
+    }
+
+    .modal .nav .btn:hover {
+      background-color: #5ca9ff;
+      /* helleres Blau beim Hover */
+      color: white;
+    }
+
+    /* === Profile Overlay – clean === */
+    .profile-overlay {
+      background: transparent;
+      display: flex;
+      justify-content: flex-start;
+      /* links ausrichten */
+      align-items: flex-start;
+      text-align: left;
+      gap: 8px;
+      padding: 0 20px;
+    }
+
+    /* Kompakte Profilkarte mit Grid-Layout */
+    .profile-card {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      /* Bild | Text */
+      grid-template-rows: auto auto;
+      /* Zeile1: Bild+Header, Zeile2: Text */
+      column-gap: 14px;
+      row-gap: 6px;
+      align-items: center;
+      /* Header mittig zur Bildzeile */
+      max-width: 420px;
+      min-height: 220px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: rgba(0, 0, 0, .55);
+      border: 1px solid rgba(255, 255, 255, .15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    }
+
+    /* H3 + P direkt als Grid-Kinder verwenden */
+    .profile-overlay .about-text {
+      display: contents;
+    }
+
+    /* Bild links, oben ausgerichtet */
+    .profile-card .profile-pic {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      width: 84px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    /* Header rechts vom Bild, kompakt */
+    .profile-card h3 {
+      grid-column: 2;
+      grid-row: 1;
+      margin: -40px 0 2px;
+      /* Header 5px nach oben verschoben */
+      line-height: 1.1;
+      font-size: 22px;
+
+    }
+
+    /* Lauftext unter Bild + Header über volle Breite */
+    .profile-card p {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      margin: -100px 0 2px;
+      line-height: 1.25;
+      opacity: .95;
+    }
+
+    /* Mobile: Karte nutzt die Breite, bleibt aber kompakt */
+    @media (max-width: 640px) {
+      .profile-overlay {
+        padding: 0 12px;
+      }
+
+      .profile-card {
+        max-width: calc(100% - 24px);
+      }
+    }
+
+    #contactModal .btn.contact {
+      background-color: #3a7bd5;
+      color: #fff;
+      border: none;
+    }
+
+    #contactModal .btn.contact:hover {
+      background-color: #5ca9ff;
+    }
+
+    #contactModal .btn.contact.ghost {
+      background: transparent;
+      color: #3a7bd5;
+      border: 1px solid #3a7bd5;
+    }
+
+    #contactModal .btn.contact.ghost:hover {
+      color: #fff;
+      background: #5ca9ff;
+      border-color: #5ca9ff;
+    }
+
+    #contactModal .contact-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    #contactModal .contact-label {
+      min-width: 70px;
+      color: var(--muted);
+    }
+
+    #contactModal .contact-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    #contactModal .contact-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ---- Gallery ---- */
+    /* ---- Masonry Gallery (ArtStation-Style) ---- */
+    .gallery-section {
+      margin: 28px 0 40px;
+    }
+
+    .gallery-grid {
+      column-gap: 8px;
+      /* kleiner Abstand zwischen Spalten */
+      column-fill: balance;
+      /* gleichmäßig verteilen */
+      /* Spaltenanzahl je nach Breite */
+      column-count: 2;
+    }
+
+    @media (max-width: 1200px) {
+      .gallery-grid {
+        column-count: 3;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .gallery-grid {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .gallery-grid {
+        column-count: 1;
+      }
+    }
+
+    .gallery-item {
+      display: inline-block;
+      /* wichtig für columns */
+      width: 100%;
+      margin: 0 0 8px;
+      /* vertikaler Abstand */
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      break-inside: avoid;
+      /* verhindert Spaltenbrüche im Item */
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      /* natürliche Höhe behalten (keine Quadrate) */
+      object-fit: cover;
+      transition: transform .2s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.02);
+    }
+
+
+    .controls .btn {
+      background: #3a7bd5;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .controls .btn:hover {
+      background: #5ca9ff;
+    }
+
+    /* Lightbox sauber zentrieren */
+    #lightboxModal {
+      display: none;
+    }
+
+    #lightboxModal.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightboxModal .dialog {
+      position: relative;
+      max-width: 96vw;
+      max-height: 92vh;
+      width: auto;
+      height: auto;
+      background: #000;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      /* wichtig für zentrieren */
+    }
+
+    #lightboxModal .frame {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* mittig */
+      background: #000;
+    }
+
+    /* Bild nicht strecken, mittig halten */
+    #lightboxModal .frame img {
+      max-width: 96vw;
+      max-height: 92vh;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+
+      .lightbox-title {
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    .lightbox-dialog {
+      display: flex;
+      flex-direction: column;
+      /* Stapelt Titel, Bild, Close-Button */
+      align-items: center;
+      max-width: 96vw;
+      max-height: 92vh;
+    }
+
+    .lightbox-title {
+      width: 100%;
+      text-align: center;
+      /* zentriert den Text */
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    #lbFrame {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: black;
+      width: 100%;
+      flex: 1;
+      /* Bild nimmt restlichen Platz */
+    }
+
+    #lbFrame img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* Lightbox: Titel oben, Bild passt vollständig in den Rest */
+    #lightboxModal.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightboxModal .dialog,
+    #lightboxModal .lightbox-dialog {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      /* Zeile 1: Titel, Zeile 2: Bildbereich */
+      max-width: 96vw;
+      max-height: 92vh;
+      width: min(96vw, 1600px);
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #lightboxModal .lightbox-title {
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    #lightboxModal .frame {
+      /* sehr wichtig, sonst schneidet Grid Inhalte ab */
+      min-height: 0;
+      min-width: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      /* falls Bild höher ist, kann man scrollen statt Abschneiden */
+      background: #000;
+    }
+
+    #lightboxModal .frame img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+
+    /* --- Lightbox fix: 1 Spalte, Titel oben, Bild zentriert --- */
+    #lightboxModal.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightboxModal .dialog {
+      display: grid;
+      grid-template-columns: 1fr !important;
+      /* überschreibt 2-Spalten-Layout vom Projekt-Modal */
+      grid-template-rows: auto 1fr;
+      /* Zeile1: Titel, Zeile2: Bild */
+      width: min(96vw, 1600px);
+      height: min(92vh, 92vh);
+      max-width: none;
+      max-height: none;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      /* keine Extra-Padding */
+    }
+
+    #lightboxModal .lightbox-title {
+      grid-row: 1;
+      grid-column: 1;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    #lightboxModal .frame {
+      grid-row: 2;
+      grid-column: 1;
+      min-width: 0;
+      min-height: 0;
+      /* wichtig gegen Abschneiden */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+    }
+
+    #lightboxModal .frame img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Close-Button überlagert, frisst keinen Platz */
+    #lightboxModal .closebar {
+      position: absolute;
+      top: 1px;
+      right: 1px;
+    }
+
+    #lightboxModal .closebar .btn {
+      background: #0b192e;
+      color: #fff;
+      border: none;
+    }
+
+    #lightboxModal .closebar .btn:hover {
+      background: #5ca9ff;
+    }
+
+    #lightboxModal .btn {
+      background-color: #1a1a1a;
+      /* dunkles Grau */
+      color: #fff;
+      /* weiße Schrift */
+      border: 1px solid #333;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    #lightboxModal .btn:hover {
+      background-color: #333;
+      /* etwas heller beim Hover */
+    }
+
+    .card {
+      cursor: pointer;
+    }
+
+    .card:focus-visible {
+      outline: 2px solid #3a7bd5;
+      outline-offset: 2px;
+    }
+
+    .card .btn {
+      cursor: pointer;
+    }
+
+    /* === About-Modal kompakt machen === */
 #aboutModal .dialog {
-  max-width: 600px;     /* Breiter = größer, schmaler = kleiner */
-  width: 90vw;
-  max-height: 80vh;
-  grid-template-columns: 1fr; /* nur eine Spalte */
+  display: block;           /* normales Block-Layout, kein Grid */
+  width: auto;              /* passt sich Inhalt an */
+  max-width: 700px;         /* optional: Begrenzung für gute Lesbarkeit */
+  height: auto;             /* Höhe nur so groß wie Text */
+  max-height: 90vh;         /* aber nicht höher als Bildschirm */
+  overflow: auto;           /* falls Text doch mal sehr lang ist */
+  padding: 24px;
 }
-/* Prev/Next Buttons im Projekt-Modal */
-.modal .nav .btn {
-  background-color: #3a7bd5; /* mittleres Blau */
-  color: white;
-  border: none;
-}
-
-.modal .nav .btn:hover {
-  background-color: #5ca9ff; /* helleres Blau beim Hover */
-  color: white;
-}
-
-/* === Profile Overlay – clean === */
-.profile-overlay{
-  background: transparent;
-  display: flex;
-  justify-content: flex-start;     /* links ausrichten */
-  align-items: flex-start;
-  text-align: left;
-  gap: 8px;
-  padding: 0 20px;
+/* === Contact-Modal kompakt machen === */
+#contactModal .dialog {
+  display: block;           /* normales Block-Layout */
+  width: auto; 
+  min-width: 500px;             /* passt sich Inhalt an */
+  max-width: 500px;         /* etwas schmaler, da weniger Text */
+  height: auto;  
+  min-height: 20vh;            /* Höhe nur so groß wie Inhalt */
+  max-height: 80vh;         /* falls Inhalt mal größer wird */
+  overflow: auto;           /* scrollt, wenn zu voll */
+  padding: 24px;
 }
 
-/* Kompakte Profilkarte mit Grid-Layout */
-.profile-card{
-  display: grid;
-  grid-template-columns: 84px 1fr; /* Bild | Text */
-  grid-template-rows: auto auto;   /* Zeile1: Bild+Header, Zeile2: Text */
-  column-gap: 14px;
-  row-gap: 6px;
-  align-items: center;             /* Header mittig zur Bildzeile */
-  max-width: 420px;
-  min-height: 220px;
-  padding: 14px 18px;
-  border-radius: 16px;
-  background: rgba(0,0,0,.55);
-  border: 1px solid rgba(255,255,255,.15);
-  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+/* === Close-Buttons in About/Contact besser sichtbar === */
+#aboutModal .btn,
+#contactModal .btn {
+  background: transparent;       /* kein Block hinterlegt */
+  color: #fff;                   /* weißer Text */
+  font-size: 20px;               /* etwas größer */
+  border: none;                  /* ohne Rand */
+  cursor: pointer;
 }
 
-/* H3 + P direkt als Grid-Kinder verwenden */
-.profile-overlay .about-text{ display: contents; }
+#aboutModal .btn:hover,
+#contactModal .btn:hover {
+  color: #5ca9ff;                /* hellblau beim Hover */
+}
 
-/* Bild links, oben ausgerichtet */
-.profile-card .profile-pic{
-  grid-column: 1;
-  grid-row: 1;
-  align-self: start;
-  width: 84px;
-  height: 84px;
-  object-fit: cover;
+/* === Close-Button im Projekt-Modal sichtbar machen === */
+/* Projekt-Modal: Close-Button sichtbar machen */
+.modal .details button#close{
+  background: rgba(0,0,0,.6);
+  color:#fff;
+  border:none;
+  font-size:18px;
+  line-height:1;
+  padding:6px 10px;
+  border-radius:8px;
+}
+.modal .details button#close:hover{
+  background:#5ca9ff;
+  color:#fff;
+}
+/* Dialog als Bezugspunkt */
+.modal .dialog{ position: relative; }
+
+/* Close schwebend */
+.modal .details button#close{
+  position:absolute;
+  top:12px; right:12px;
+  width:32px; height:32px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+/* === Einheitlicher Close-Button für alle Modals === */
+.modal .dialog {
+  position: relative; /* Bezugspunkt für den schwebenden Button */
+}
+
+.modal .dialog button#close,
+#aboutModal .dialog button#closeAbout,
+#contactModal .dialog button#closeContact {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 2px solid #fff;
-}
-
-/* Header rechts vom Bild, kompakt */
-.profile-card h3{
-  grid-column: 2;
-  grid-row: 1;
-  margin: -40px 0 2px;  /* Header 5px nach oben verschoben */
-  line-height: 1.1;
-  font-size: 22px;
-  
-}
-
-/* Lauftext unter Bild + Header über volle Breite */
-.profile-card p{
-  grid-column: 1 / -1;
-  grid-row: 2;
-  margin: -100px 0 2px;
-  line-height: 1.25;
-  opacity: .95;
-}
-
-/* Mobile: Karte nutzt die Breite, bleibt aber kompakt */
-@media (max-width: 640px){
-  .profile-overlay{ padding: 0 12px; }
-  .profile-card{ max-width: calc(100% - 24px); }
-}
-#contactModal .btn.contact { background-color:#3a7bd5; color:#fff; border:none; }
-#contactModal .btn.contact:hover { background-color:#5ca9ff; }
-#contactModal .btn.contact.ghost { background:transparent; color:#3a7bd5; border:1px solid #3a7bd5; }
-#contactModal .btn.contact.ghost:hover { color:#fff; background:#5ca9ff; border-color:#5ca9ff; }
-#contactModal .contact-row { display:flex; gap:14px; align-items:center; margin:10px 0; flex-wrap:wrap; }
-#contactModal .contact-label { min-width:70px; color:var(--muted); }
-#contactModal .contact-actions { display:flex; gap:8px; flex-wrap:wrap; }
-#contactModal .contact-note { margin-top:12px; color:var(--muted); font-size:14px; }
-
-/* ---- Gallery ---- */
-/* ---- Masonry Gallery (ArtStation-Style) ---- */
-.gallery-section { margin: 28px 0 40px; }
-
-.gallery-grid{
-  column-gap: 8px;              /* kleiner Abstand zwischen Spalten */
-  column-fill: balance;         /* gleichmäßig verteilen */
-  /* Spaltenanzahl je nach Breite */
-  column-count: 2;
-}
-@media (max-width: 1200px){ .gallery-grid{ column-count: 3; } }
-@media (max-width: 800px){  .gallery-grid{ column-count: 2; } }
-@media (max-width: 520px){  .gallery-grid{ column-count: 1; } }
-
-.gallery-item{
-  display: inline-block;        /* wichtig für columns */
-  width: 100%;
-  margin: 0 0 8px;              /* vertikaler Abstand */
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  cursor: zoom-in;
-  break-inside: avoid;          /* verhindert Spaltenbrüche im Item */
-}
-.gallery-item img{
-  display: block;
-  width: 100%;
-  height: auto;                 /* natürliche Höhe behalten (keine Quadrate) */
-  object-fit: cover;
-  transition: transform .2s ease;
-}
-.gallery-item:hover img{ transform: scale(1.02); }
-
-
-.controls .btn {
-  background: #3a7bd5;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.controls .btn:hover {
-  background: #5ca9ff;
-}
-/* Lightbox sauber zentrieren */
-#lightboxModal { display: none; }
-#lightboxModal.open { display: flex; align-items: center; justify-content: center; }
-
-#lightboxModal .dialog{
-  position: relative;
-  max-width: 96vw; max-height: 92vh;
-  width: auto; height: auto;
-  background: #000; border: 1px solid var(--border); border-radius: 12px;
-  overflow: hidden; display: flex; /* wichtig für zentrieren */
-}
-
-#lightboxModal .frame{
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center; /* mittig */
-  background: #000;
-}
-
-/* Bild nicht strecken, mittig halten */
-#lightboxModal .frame img{
-  max-width: 96vw; max-height: 92vh;
-  width: auto; height: auto;
-  display: block;
-  object-fit: contain;
-  .lightbox-title {
-  color: white;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.7);
-}
-}
-.lightbox-dialog {
-  display: flex;
-  flex-direction: column; /* Stapelt Titel, Bild, Close-Button */
-  align-items: center;
-  max-width: 96vw;
-  max-height: 92vh;
-}
-
-.lightbox-title {
-  width: 100%;
-  text-align: center; /* zentriert den Text */
-  color: white;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.7);
-}
-
-#lbFrame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: black;
-  width: 100%;
-  flex: 1; /* Bild nimmt restlichen Platz */
-}
-
-#lbFrame img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-/* Lightbox: Titel oben, Bild passt vollständig in den Rest */
-#lightboxModal.open { display: flex; align-items: center; justify-content: center; }
-
-#lightboxModal .dialog,
-#lightboxModal .lightbox-dialog{
-  display: grid;
-  grid-template-rows: auto 1fr; /* Zeile 1: Titel, Zeile 2: Bildbereich */
-  max-width: 96vw;
-  max-height: 92vh;
-  width: min(96vw, 1600px);
-  background: #000;
-  position: relative;
-  overflow: hidden;
-}
-
-#lightboxModal .lightbox-title{
-  width: 100%;
-  text-align: center;
+  background: rgba(0,0,0,0.6);
   color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.7);
-}
-
-#lightboxModal .frame{
-  /* sehr wichtig, sonst schneidet Grid Inhalte ab */
-  min-height: 0;
-  min-width: 0;
-
+  font-size: 18px;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: auto;        /* falls Bild höher ist, kann man scrollen statt Abschneiden */
-  background: #000;
-}
-
-#lightboxModal .frame img{
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-
-/* --- Lightbox fix: 1 Spalte, Titel oben, Bild zentriert --- */
-#lightboxModal.open { display: flex; align-items: center; justify-content: center; }
-
-#lightboxModal .dialog{
-  display: grid;
-  grid-template-columns: 1fr !important;   /* überschreibt 2-Spalten-Layout vom Projekt-Modal */
-  grid-template-rows: auto 1fr;            /* Zeile1: Titel, Zeile2: Bild */
-  width: min(96vw, 1600px);
-  height: min(92vh, 92vh);
-  max-width: none; max-height: none;
-  background: #000;
-  position: relative;
-  overflow: hidden;
-  padding: 0;                               /* keine Extra-Padding */
-}
-
-#lightboxModal .lightbox-title{
-  grid-row: 1; grid-column: 1;
-  width: 100%; text-align: center;
-  color: #fff; font-size: 16px; font-weight: 500;
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.7);
-}
-
-#lightboxModal .frame{
-  grid-row: 2; grid-column: 1;
-  min-width: 0; min-height: 0;             /* wichtig gegen Abschneiden */
-  display: flex; align-items: center; justify-content: center;
-  background: #000; overflow: hidden; padding: 0; margin: 0;
-}
-
-#lightboxModal .frame img{
-  display: block;
-  max-width: 100%; max-height: 100%;
-  width: auto; height: auto;
-  object-fit: contain;
-}
-
-/* Close-Button überlagert, frisst keinen Platz */
-#lightboxModal .closebar{ position: absolute; top: 1px; right: 1px; }
-#lightboxModal .closebar .btn{ background:#0b192e; color:#fff; border:none; }
-#lightboxModal .closebar .btn:hover{ background:#5ca9ff; }
-#lightboxModal .btn {
-  background-color: #1a1a1a;   /* dunkles Grau */
-  color: #fff;                 /* weiße Schrift */
-  border: 1px solid #333;
-  padding: 6px 14px;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  z-index: 10;
+  line-height: 1;
 }
 
-#lightboxModal .btn:hover {
-  background-color: #333;      /* etwas heller beim Hover */
+.modal .dialog button#close:hover,
+#aboutModal .dialog button#closeAbout:hover,
+#contactModal .dialog button#closeContact:hover {
+  background: #5ca9ff;
+  color: #fff;
+}
+/* === Einheitlicher Close-Button für alle Modals === */
+.modal .dialog {
+  position: relative; /* Bezugspunkt für den schwebenden Button */
 }
 
-.card { cursor: pointer; }
-.card:focus-visible { outline: 2px solid #3a7bd5; outline-offset: 2px; }
-.card .btn { cursor: pointer; } /* Buttons behalten ihre Interaktion */
+.modal .dialog button[aria-label="Close"] {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  line-height: 1;
+}
+
+.modal .dialog button[aria-label="Close"]:hover {
+  background: #5ca9ff;
+  color: #fff;
+}
+
 
   </style>
 </head>
+
 <body>
   <header>
     <div class="container nav">
@@ -525,42 +1199,42 @@
         <a href="#" id="aboutBtn">About</a>
         <a href="#" id="contactBtn">Contact</a>
 
-       
+
       </nav>
     </div>
   </header>
 
   <main class="container">
-  <!-- Hero Section -->
+    <!-- Hero Section -->
     <section class="hero">
-  <div class="slideshow">
-    <div class="slide-track">
-      <img src="https://i.imgur.com/Ewy3oEX.png" alt="Artwork 1">
-      <img src="https://i.imgur.com/5nMKV3v.png" alt="Artwork 2">
-      <img src="https://i.imgur.com/qODzS0R.png" alt="Artwork 3">
-      <img src="https://i.imgur.com/lfFi8gV.png" alt="Artwork 4">
-      <img src="https://i.imgur.com/qSjztFx.png" alt="Artwork 5">
-      <!-- Dupliziert für Endlosschleife -->
-    <img src="https://i.imgur.com/Ewy3oEX.png" alt="Artwork 1">
-      <img src="https://i.imgur.com/5nMKV3v.png" alt="Artwork 2">
-      <img src="https://i.imgur.com/qODzS0R.png" alt="Artwork 3">
-      <img src="https://i.imgur.com/lfFi8gV.png" alt="Artwork 4">
-      <img src="https://i.imgur.com/qSjztFx.png" alt="Artwork 5">
-    </div>
-  </div>
-  <div class="profile-overlay">
-    <div class="profile-card">
-    <img class="profile-pic" src="images/profilePic.JPG" alt="Profilbild">
-    <div class="about-text">
-      <h3>Hi, am Smilla</h3>
-      <p>
-    I'm Artist<br>
-    Specializing in <br>
-    Creating immersive visuals 
-  </p>
-      
-    </div>
-  </div>
+      <div class="slideshow">
+        <div class="slide-track">
+          <img src="https://i.imgur.com/Ewy3oEX.png" alt="Artwork 1">
+          <img src="https://i.imgur.com/5nMKV3v.png" alt="Artwork 2">
+          <img src="https://i.imgur.com/qODzS0R.png" alt="Artwork 3">
+          <img src="https://i.imgur.com/lfFi8gV.png" alt="Artwork 4">
+          <img src="https://i.imgur.com/qSjztFx.png" alt="Artwork 5">
+          <!-- Dupliziert für Endlosschleife -->
+          <img src="https://i.imgur.com/Ewy3oEX.png" alt="Artwork 1">
+          <img src="https://i.imgur.com/5nMKV3v.png" alt="Artwork 2">
+          <img src="https://i.imgur.com/qODzS0R.png" alt="Artwork 3">
+          <img src="https://i.imgur.com/lfFi8gV.png" alt="Artwork 4">
+          <img src="https://i.imgur.com/qSjztFx.png" alt="Artwork 5">
+        </div>
+      </div>
+      <div class="profile-overlay">
+        <div class="profile-card">
+          <img class="profile-pic" src="images/profilePic.JPG" alt="Profilbild">
+          <div class="about-text">
+            <h3>Hi, I am Smilla</h3>
+            <p>
+              Designer and Game Artist based in Munich.<br>
+              I create illustrations, 2D and 3D art,<br>
+              animations, shaders, and games.
+            </p>
+
+          </div>
+        </div>
     </section>
 
 
@@ -568,7 +1242,8 @@
       <div class="row">
         <strong>Discipline</strong>
         <label class="chip"><input type="checkbox" data-filter="discipline" value="2D Art" checked>2D Art</label>
-        <label class="chip"><input type="checkbox" data-filter="discipline" value="2D Animation" checked>2D Animation</label>
+        <label class="chip"><input type="checkbox" data-filter="discipline" value="2D Animation" checked>2D
+          Animation</label>
         <label class="chip"><input type="checkbox" data-filter="discipline" value="3D" checked>3D</label>
         <label class="chip"><input type="checkbox" data-filter="discipline" value="Tech Art" checked>Tech Art</label>
         <label class="chip"><input type="checkbox" data-filter="discipline" value="Games" checked>Games</label>
@@ -578,8 +1253,9 @@
         <label class="chip"><input type="checkbox" data-filter="media" value="video" checked>Video</label>
         <label class="chip"><input type="checkbox" data-filter="media" value="html" checked>Embeds</label>
         <span class="spacer"></span>
-        <input class="search" id="search" placeholder="Search title, tags, tools…"/>
+        <input class="search" id="search" placeholder="Search title, tags, tools…" />
         <select id="sort">
+          <option value="default">Default</option>
           <option value="new">Newest</option>
           <option value="old">Oldest</option>
           <option value="az">A → Z</option>
@@ -591,9 +1267,9 @@
     <section class="grid" id="grid" aria-live="polite"></section>
 
     <section id="gallery" class="gallery-section">
-  <h2>Gallery</h2>
-  <div id="galleryGrid" class="gallery-grid"></div>
-</section>
+      <h2>Gallery</h2>
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
 
     <footer>
       <p id="contact"><strong>Contact:</strong> smillapelz@gmail.com · Munich, DE</p>
@@ -606,293 +1282,293 @@
        For Games, set discipline:'Games' and group related assets via the media array.
   -->
   <script>
-  const PROJECTS = [
-    {
-      id:'game_mushroom',
-      title:'Mushventure — Solo project — 2D Platformer',
-      discipline:'Games',
-      mediaType:'video',
-      date:'2025-07-20',
-      status:['case','playable'],
-      tools:['Unity','C#','2D Art','Level Design'],
-      description: `Solo project — art, level design, and programming. Short case study with gameplay and art bundle.<br> <a href="https://dreepysbraincell.itch.io/mushventure" target="_blank" rel="noopener noreferrer">Play Mushventure on Itch.io</a>`,
+    const PROJECTS = [
+      {
+        id: 'game_mushroom',
+        title: 'Mushventure — Solo project — 2D Platformer',
+        discipline: 'Games',
+        mediaType: 'video',
+        date: '2025-07-20',
+        status: ['case', 'playable'],
+        tools: ['Unity', 'C#', '2D Art', 'Level Design'],
+        description: `Solo project — art, level design, and programming. Short case study with gameplay and art bundle.<br> <a href="https://dreepysbraincell.itch.io/mushventure" target="_blank" rel="noopener noreferrer">Play Mushventure on Itch.io</a>`,
 
-      cover:{kind:'image', src:'https://i.imgur.com/nI9Oq5w.png'},
-      media:[
-        {kind:'video', src:'', poster:'', caption:'Gameplay trailer placeholder'},
-        {kind:'image', src:'https://i.imgur.com/MpNMIwK.png'},
-        {kind:'image', src:'https://i.imgur.com/qr4to3i.png'},
-        {kind:'image', src:'https://i.imgur.com/9P5O74r.png'},
-        {kind:'image', src:'https://i.imgur.com/nI9Oq5w.png'},
-        {kind:'image', src:'https://i.imgur.com/NaBjPA4.png'},
-        {kind:'image', src:'https://i.imgur.com/DZR4E6K.png'},
-        {kind:'image', src:'https://i.imgur.com/5xQU4JJ.png'}
-      ],
-      tags:['Platformer','Solo','Gameplay','2D Art', '2D Animation', 'Pixel Art']
-    },
-    {
-      id:'game_gemina',
-      title:'Gemina — Solo project',
-      discipline:'Games',
-      mediaType:'video',
-      date:'2025-08-01',
-      status:['wip'],
-      tools:['Unreal Engine','Niagara','Shaders','Blueprints','VFX'],
-      description:'Solo project focusing on character VFX similar to MOBA readability. Includes shader/VFX breakdowns.',
-      cover:{kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('VFX Showcase'))},
-      media:[
-        {kind:'image', src:'gameplay footage'},
-        {kind:'image', src:'environment footage'},
-        {kind:'image', src:'character footage'},
-        {kind:'image', src:'VFX footage'}
-      ],
-      tags:['Gameplay','3D Art','Animation','VFX','Niagara','Tech Art']
-    },
-    {
-      id:'2d_charsheets',
-      title:'2D Character Sheets — Assorted',
-      discipline:'2D Art',
-      mediaType:'image',
-      date:'2025-06-15',
-      tools:['Photoshop'],
-      description:'Turnarounds, expressions, callouts. Designed for handoff to animators.',
-      cover:{kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Char Sheets'))},
-      media:[
-        {kind:'image', src: 'images/CharacterDesign/Imarii/ImariiMM.png',  caption: 'UI elements'},
-        {kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Expressions'))}
-      ],
-      tags:['Character Design','Sheets']
-    },
-    
-    {
-      id:'3d_Environment props',
-      title:'Stylized 3D Props — Crates • Walls • Nature',
-      discipline:'3D',
-      mediaType:'image',
-      date:'2025-04-30',
-      tools:['Blender','Unreal Engine','Photoshop'],
-      description:'3D props modeled in Blender and imported into Unreal Engine. <br> Some assets feature hand-painted textures, while others use custom shaders.<br> Materials were created directly in Unreal Engine.<br> Developed as part of my solo projects.',
-      cover:{kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Stylized Props'))},
-      media:[
-        {kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Prop Board'))}
-      ],
-      tags:['Blender']
-    },
-    {
-      id:'3d_chars',
-      title:'3D Characters and Animations— Gemina ',
-      discipline:'3D',
-      mediaType:'image',
-      date:'2025-04-10',
-      tools:['Blender','Rigify','Mixamo','Photoshop','Unreal Engine'],
-      description:'Assorted rigs with topology views and short animation clips.',
-      cover:{kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('3D Characters'))},
-      media:[
-        {kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Sculpt vs Retopo'))},
-        {kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Wireframe Topology'))},
-        {kind:'video', src:'', caption:'Run cycle placeholder'}
-      ],
-      tags:['Topology','Rigging','Animation']
-    },
+        cover: { kind: 'image', src: 'https://i.imgur.com/nI9Oq5w.png' },
+        media: [
+          { kind: 'video', src: '', poster: '', caption: 'Gameplay trailer placeholder' },
+          { kind: 'image', src: 'https://i.imgur.com/MpNMIwK.png' },
+          { kind: 'image', src: 'https://i.imgur.com/qr4to3i.png' },
+          { kind: 'image', src: 'https://i.imgur.com/9P5O74r.png' },
+          { kind: 'image', src: 'https://i.imgur.com/nI9Oq5w.png' },
+          { kind: 'image', src: 'https://i.imgur.com/NaBjPA4.png' },
+          { kind: 'image', src: 'https://i.imgur.com/DZR4E6K.png' },
+          { kind: 'image', src: 'https://i.imgur.com/5xQU4JJ.png' }
+        ],
+        tags: ['Platformer', 'Solo', 'Gameplay', '2D Art', '2D Animation', 'Pixel Art']
+      },
+      {
+        id: 'game_gemina',
+        title: 'Gemina — Solo project',
+        discipline: 'Games',
+        mediaType: 'video',
+        date: '2025-08-01',
+        status: ['wip'],
+        tools: ['Unreal Engine', 'Niagara', 'Shaders', 'Blueprints', 'VFX'],
+        description: 'Solo project focusing on character VFX similar to MOBA readability. Includes shader/VFX breakdowns.',
+        cover: { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('VFX Showcase')) },
+        media: [
+          { kind: 'image', src: 'gameplay footage' },
+          { kind: 'image', src: 'environment footage' },
+          { kind: 'image', src: 'character footage' },
+          { kind: 'image', src: 'VFX footage' }
+        ],
+        tags: ['Gameplay', '3D Art', 'Animation', 'VFX', 'Niagara', 'Tech Art']
+      },
+      {
+        id: '2d_charsheets',
+        title: '2D Character Sheets — Assorted',
+        discipline: '2D Art',
+        mediaType: 'image',
+        date: '2025-06-15',
+        tools: ['Photoshop'],
+        description: 'Turnarounds, expressions, callouts. Designed for handoff to animators.',
+        cover: { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Char Sheets')) },
+        media: [
+          { kind: 'image', src: 'images/CharacterDesign/Imarii/ImariiMM.png', caption: 'UI elements' },
+          { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Expressions')) }
+        ],
+        tags: ['Character Design', 'Sheets']
+      },
 
-    {
-      id:'tech_shaders',
-      title:'Shaders & VFX — Gemina',
-      discipline:'Tech Art',
-      mediaType:'image',
-      date:'2025-03-28',
-      tools:['Unreal Engine', 'Niagara','Shader Graph','Photoshop','Unity'],
-      description:'Breakdowns of shader graphs and Niagara systems with short clips.',
-      cover:{kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Shaders & VFX'))},
-      media:[
-        {kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Shader Graph'))},
-        {kind:'image', src:'data:image/svg+xml;utf8,'+encodeURIComponent(makeSVG('Niagara System'))},
-        {kind:'video', src:'https://i.imgur.com/6qxghnH.mp4', caption:'Effect clip placeholder'}
-      ],
-      tags:['Tech Art']
-    },
-    {
-      id:'storyboard',
-      title:'Storyboard — University Project',
-      discipline:'2D Art',
-      mediaType:'image',
-      date:'2023-06-23',
-      tools:['Photoshop'],
-      description:'Storyboard created for a university course',
-      cover:{kind:'image', src:'https://i.imgur.com/q7UreHa.png'},
-      media:[
-        {kind:'image', src:'https://i.imgur.com/JsC5PE0.png'},
-        {kind:'image', src:'https://i.imgur.com/JlKhtpM.png'},
-        {kind:'image', src:'https://i.imgur.com/fnHWY05.png'},
-        {kind:'image', src:'https://i.imgur.com/5eRsA4y.png'},
-        {kind:'image', src:'https://i.imgur.com/MspgT3R.png'},
-        {kind:'image', src:'https://i.imgur.com/ETEBWIu.png'},
-        {kind:'image', src:'https://i.imgur.com/Ko2KKTA.png'},
-        {kind:'image', src:'https://i.imgur.com/0GB7yU9.png'},
-        {kind:'image', src:'https://i.imgur.com/9Hxs8gj.png'},
-        {kind:'image', src:'https://i.imgur.com/aE8Y9fj.png'},
-        {kind:'image', src:'https://i.imgur.com/w0oUqFU.png'},
-  
-      ],
-      tags:['Storyboard', 'Animation', '2D Art']
-    },
+      {
+        id: '3d_Environment props',
+        title: 'Stylized 3D Props — Crates • Walls • Nature',
+        discipline: '3D',
+        mediaType: 'image',
+        date: '2025-04-30',
+        tools: ['Blender', 'Unreal Engine', 'Photoshop'],
+        description: '3D props modeled in Blender and imported into Unreal Engine. <br> Some assets feature hand-painted textures, while others use custom shaders.<br> Materials were created directly in Unreal Engine.<br> Developed as part of my solo projects.',
+        cover: { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Stylized Props')) },
+        media: [
+          { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Prop Board')) }
+        ],
+        tags: ['Blender']
+      },
+      {
+        id: '3d_chars',
+        title: '3D Characters and Animations— Gemina ',
+        discipline: '3D',
+        mediaType: 'image',
+        date: '2025-04-10',
+        tools: ['Blender', 'Rigify', 'Mixamo', 'Photoshop', 'Unreal Engine'],
+        description: 'Assorted rigs with topology views and short animation clips.',
+        cover: { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('3D Characters')) },
+        media: [
+          { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Sculpt vs Retopo')) },
+          { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Wireframe Topology')) },
+          { kind: 'video', src: '', caption: 'Run cycle placeholder' }
+        ],
+        tags: ['Topology', 'Rigging', 'Animation']
+      },
 
-   {
-      id:'KämpfenUndHoffen',
-      title:'Kämpfen und Hoffen — Comic Published in the University Newspaper',
-      discipline:'2D Art',
-      mediaType:'image',
-      date:'2023-06-22',
-      tools:['Photoshop'],
-      description:'"Kämpfen und Hoffen" ("Fighting and Hoping") is a comic created for the University Newspaper.<br> The story explores themes of pride, resilience, and queer history, highlighting the struggles and hopes of LGBTQ+ communities across generations.<br> Through expressive characters and visual storytelling, the comic connects personal identity with broader historical moments, aiming to both educate and inspire.<br> My role covered concept development, illustration, and final comic production.',
-      cover:{kind:'image', src:'https://i.imgur.com/GfPQhfM.png'},
-      media:[
-        {kind:'image', src:'https://i.imgur.com/LuwIBzb.png'},
-        {kind:'image', src:'https://i.imgur.com/gUipJqr.png'},
-        {kind:'image', src:'https://i.imgur.com/OyoBF4T.png'},
-     
-  
-  
-      ],
-      tags:['Comic', '2D Art']
-    },
+      {
+        id: 'tech_shaders',
+        title: 'Shaders & VFX — Gemina',
+        discipline: 'Tech Art',
+        mediaType: 'image',
+        date: '2025-03-28',
+        tools: ['Unreal Engine', 'Niagara', 'Shader Graph', 'Photoshop', 'Unity'],
+        description: 'Breakdowns of shader graphs and Niagara systems with short clips.',
+        cover: { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Shaders & VFX')) },
+        media: [
+          { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Shader Graph')) },
+          { kind: 'image', src: 'data:image/svg+xml;utf8,' + encodeURIComponent(makeSVG('Niagara System')) },
+          { kind: 'video', src: 'https://i.imgur.com/6qxghnH.mp4', caption: 'Effect clip placeholder' }
+        ],
+        tags: ['Tech Art']
+      },
+      {
+        id: 'storyboard',
+        title: 'Storyboard — University Project',
+        discipline: '2D Art',
+        mediaType: 'image',
+        date: '2023-06-23',
+        tools: ['Photoshop'],
+        description: 'Storyboard created for a university course',
+        cover: { kind: 'image', src: 'https://i.imgur.com/q7UreHa.png' },
+        media: [
+          { kind: 'image', src: 'https://i.imgur.com/JsC5PE0.png' },
+          { kind: 'image', src: 'https://i.imgur.com/JlKhtpM.png' },
+          { kind: 'image', src: 'https://i.imgur.com/fnHWY05.png' },
+          { kind: 'image', src: 'https://i.imgur.com/5eRsA4y.png' },
+          { kind: 'image', src: 'https://i.imgur.com/MspgT3R.png' },
+          { kind: 'image', src: 'https://i.imgur.com/ETEBWIu.png' },
+          { kind: 'image', src: 'https://i.imgur.com/Ko2KKTA.png' },
+          { kind: 'image', src: 'https://i.imgur.com/0GB7yU9.png' },
+          { kind: 'image', src: 'https://i.imgur.com/9Hxs8gj.png' },
+          { kind: 'image', src: 'https://i.imgur.com/aE8Y9fj.png' },
+          { kind: 'image', src: 'https://i.imgur.com/w0oUqFU.png' },
 
-  {
-      id:'Tilt Frog',
-      title:'Tilt Frog — Internship Project — 2D Artist on Shipped Game',
-      discipline:'Games',
-      mediaType:'image',
-      date:'2024-03-08',
-      status:['playable'],
-      tools:['Photoshop', 'Unity'],
-      description:`A selection of sprite designs and concept art created in my role as the 2D artist.<br>
+        ],
+        tags: ['Storyboard', 'Animation', '2D Art']
+      },
+
+      {
+        id: 'KämpfenUndHoffen',
+        title: 'Kämpfen und Hoffen — Comic Published in the University Newspaper',
+        discipline: '2D Art',
+        mediaType: 'image',
+        date: '2023-06-22',
+        tools: ['Photoshop'],
+        description: '"Kämpfen und Hoffen" ("Fighting and Hoping") is a comic created for the University Newspaper.<br> The story explores themes of pride, resilience, and queer history, highlighting the struggles and hopes of LGBTQ+ communities across generations.<br> Through expressive characters and visual storytelling, the comic connects personal identity with broader historical moments, aiming to both educate and inspire.<br> My role covered concept development, illustration, and final comic production.',
+        cover: { kind: 'image', src: 'https://i.imgur.com/GfPQhfM.png' },
+        media: [
+          { kind: 'image', src: 'https://i.imgur.com/LuwIBzb.png' },
+          { kind: 'image', src: 'https://i.imgur.com/gUipJqr.png' },
+          { kind: 'image', src: 'https://i.imgur.com/OyoBF4T.png' },
+
+
+
+        ],
+        tags: ['Comic', '2D Art']
+      },
+
+      {
+        id: 'Tilt Frog',
+        title: 'Tilt Frog — Internship Project — 2D Artist on Shipped Game',
+        discipline: 'Games',
+        mediaType: 'image',
+        date: '2024-03-08',
+        status: ['playable'],
+        tools: ['Photoshop', 'Unity'],
+        description: `A selection of sprite designs and concept art created in my role as the 2D artist.<br>
       Beyond creating the assets, I worked iteratively in Unity on my own, testing sprite shapes, refining visuals, and ensuring they fit seamlessly in gameplay.<br>
       You can view the finished game on Steam here: <a href="https://store.steampowered.com/app/2507990/tilt_frog/" target="_blank">Tilt Frog</a>.`,
-      cover:{kind:'image', src: 'https://i.imgur.com/IozUpZc.png' }, 
-      media:[
-    { kind: 'image', src: 'https://i.imgur.com/IozUpZc.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/arCBuRJ.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/a4S7qtO.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/KROGbBc.png', caption: '2D Concepts' },
+        cover: { kind: 'image', src: 'https://i.imgur.com/IozUpZc.png' },
+        media: [
+          { kind: 'image', src: 'https://i.imgur.com/IozUpZc.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/arCBuRJ.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/a4S7qtO.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/KROGbBc.png', caption: '2D Concepts' },
 
-    { kind: 'image', src: 'https://i.imgur.com/UNIbeEB.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/bqVMRpQ.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/6Q7PsyU.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/010SyXR.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/UNIbeEB.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/bqVMRpQ.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/6Q7PsyU.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/010SyXR.png', caption: '2D Concepts' },
 
-    { kind: 'image', src: 'https://i.imgur.com/vha1cVU.png',  caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/7q0MNco.png',  caption: '2D Concepts' }
-    
-      ],
-      tags:['2D Art','Concept Art','Shipped','Internship']
-    },
-    {
-      id:'Eyobi',
-      title:'Eyobi — Internship Project — 2D Artist on Shipped Game',
-      discipline:'Games',
-      mediaType:'image',
-      date:'2024-03-05',
-      status:['playable'],
-      tools:['Photoshop'],
-      description:`A selection of concept art and UI elements created in my role as the 2D artist, presented here alongside a link to the finished game: <a href="https://www.eyobi.com/" target="_blank" rel="noopener noreferrer">eyobi.com</a>`,
-      cover:{kind:'image', src: 'https://i.imgur.com/nBVb52x.png' }, 
-      media:[
-    { kind: 'image', src: 'https://i.imgur.com/nBVb52x.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/qhPIIIp.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/gKWSnq3.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/5HhRkXC.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/vha1cVU.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/7q0MNco.png', caption: '2D Concepts' }
 
-    { kind: 'image', src: 'https://i.imgur.com/W1BIMF8.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/lhBVVZa.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/8Vo1sVU.png', caption: '2D Concepts' },
-    { kind: 'image', src: 'https://i.imgur.com/C4QuiIJ.png', caption: '2D Concepts' },
+        ],
+        tags: ['2D Art', 'Concept Art', 'Shipped', 'Internship']
+      },
+      {
+        id: 'Eyobi',
+        title: 'Eyobi — Internship Project — 2D Artist on Shipped Game',
+        discipline: 'Games',
+        mediaType: 'image',
+        date: '2024-03-05',
+        status: ['playable'],
+        tools: ['Photoshop'],
+        description: `A selection of concept art and UI elements created in my role as the 2D artist, presented here alongside a link to the finished game: <a href="https://www.eyobi.com/" target="_blank" rel="noopener noreferrer">eyobi.com</a>`,
+        cover: { kind: 'image', src: 'https://i.imgur.com/nBVb52x.png' },
+        media: [
+          { kind: 'image', src: 'https://i.imgur.com/nBVb52x.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/qhPIIIp.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/gKWSnq3.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/5HhRkXC.png', caption: '2D Concepts' },
 
-    { kind: 'image', src: 'https://i.imgur.com/a36nxKM.png',  caption: 'UI elements' }
-      ],
-      tags:['2D Art','Concept Art','Shipped','Internship']
-    },
+          { kind: 'image', src: 'https://i.imgur.com/W1BIMF8.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/lhBVVZa.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/8Vo1sVU.png', caption: '2D Concepts' },
+          { kind: 'image', src: 'https://i.imgur.com/C4QuiIJ.png', caption: '2D Concepts' },
 
-   {
-      id:'PixelForge',
-      title:'Pixel Forge — Internship Project — 2D Artist on Shipped Game',
-      discipline:'Games',
-      mediaType:'image',
-      date:'2023-11-23',
-      status:['playable'],
-      tools:['Photoshop'],
-      description:`A selection of background art created in my role as the 2D artist during a game jam.<br>
+          { kind: 'image', src: 'https://i.imgur.com/a36nxKM.png', caption: 'UI elements' }
+        ],
+        tags: ['2D Art', 'Concept Art', 'Shipped', 'Internship']
+      },
+
+      {
+        id: 'PixelForge',
+        title: 'Pixel Forge — Internship Project — 2D Artist on Shipped Game',
+        discipline: 'Games',
+        mediaType: 'image',
+        date: '2023-11-23',
+        status: ['playable'],
+        tools: ['Photoshop'],
+        description: `A selection of background art created in my role as the 2D artist during a game jam.<br>
       These assets were designed to establish atmosphere and visual consistency under tight time constraints.<br>
       You can view and play the finished game here: <a href="https://pandabee-studios.itch.io/pixel-forge" target="_blank">Pixel Forge</a>.`,
-      cover:{kind:'image', src: 'https://i.imgur.com/nwfKJh9.png' }, 
-      media:[
-      { kind: 'image', src: 'https://i.imgur.com/nwfKJh9.png', caption: 'Pixel Art Background' },
-    { kind: 'image', src: 'https://i.imgur.com/JVr8vcx.png', caption: 'Pixel Art Background' },
-    { kind: 'image', src: 'https://i.imgur.com/V2dzoCH.png',  caption: 'Pixel Art Background' },
-    {kind:'video', src:'https://i.imgur.com/mK4CeAG.mp4', caption:'Pixel Art Animation'}
-      ],
-      tags:['2D Art','Pixel Art','Shipped','Internship']
-    },
+        cover: { kind: 'image', src: 'https://i.imgur.com/nwfKJh9.png' },
+        media: [
+          { kind: 'image', src: 'https://i.imgur.com/nwfKJh9.png', caption: 'Pixel Art Background' },
+          { kind: 'image', src: 'https://i.imgur.com/JVr8vcx.png', caption: 'Pixel Art Background' },
+          { kind: 'image', src: 'https://i.imgur.com/V2dzoCH.png', caption: 'Pixel Art Background' },
+          { kind: 'video', src: 'https://i.imgur.com/mK4CeAG.mp4', caption: 'Pixel Art Animation' }
+        ],
+        tags: ['2D Art', 'Pixel Art', 'Shipped', 'Internship']
+      },
 
-  
-    {
-  id: 'sternburg',
-    title: 'Sternburg - Anniversary Animation',
-    discipline: '2D Animation',
-    mediaType: 'video',
-    date: '2023-01-10',
-    tools: ['Photoshop', 'After Effects'],
-    description: `This puppet animation was created as part of a university group project for a competition celebrating the 200th anniversary of the Leipzig beer brand Sternburg.<br>
+
+      {
+        id: 'sternburg',
+        title: 'Sternburg - Anniversary Animation',
+        discipline: '2D Animation',
+        mediaType: 'video',
+        date: '2023-01-10',
+        tools: ['Photoshop', 'After Effects'],
+        description: `This puppet animation was created as part of a university group project for a competition celebrating the 200th anniversary of the Leipzig beer brand Sternburg.<br>
 Our team’s project was awarded 3rd place.<br>
 I was responsible for designing and preparing background assets for After Effects, building and animating the puppet rigs, as well as scene setup, editing, and the complete production in After Effects.<br>
 The final animation was fully animated and assembled by me in After Effects.`,
-    cover: { kind: 'image', src: 'https://i.imgur.com/RO6jKj5.png' },
-    media: [
-      { kind: 'video', src: 'https://i.imgur.com/W2oPnID.mp4', caption: 'Celebrating the 200th anniversary of Sternburg' }
-    ],
-    tags: ['Animation', 'Group Project']
-    },
+        cover: { kind: 'image', src: 'https://i.imgur.com/RO6jKj5.png' },
+        media: [
+          { kind: 'video', src: 'https://i.imgur.com/W2oPnID.mp4', caption: 'Celebrating the 200th anniversary of Sternburg' }
+        ],
+        tags: ['Animation', 'Group Project']
+      },
 
-    {
-    id: 'bachelor',
-    title: 'Bachelor Project — Accessible Play: Designing Board Games for Children with Visual Impairments',
-    discipline: 'Games',
-    mediaType: 'image',
-    date: '2024-07-05',
-    tools: ['Photoshop'],
-       description: `For my bachelor’s project, titled “Accessible Play: Designing Board Games for Children with Visual Impairments,” I developed an inclusive board game based on qualitative user research. The game is designed to be engaging and enjoyable for both children with and without visual impairments.`,
-    cover: { kind: 'image', src: 'https://i.imgur.com/RckskLB.png' },
-    media: [
-      { kind: 'image', src: 'https://i.imgur.com/RckskLB.png', caption: 'Concept 1' },
-      { kind: 'image', src: 'https://i.imgur.com/BcvR0u6.png', caption: 'Concept 2' },
-      { kind: 'image', src: 'https://i.imgur.com/a84oRHN.png', caption: 'Concept 2' }
-    ],
-    tags: ['Game Design', 'Concept', 'Research']
-    }
+      {
+        id: 'bachelor',
+        title: 'Bachelor Project — Accessible Play: Designing Board Games for Children with Visual Impairments',
+        discipline: 'Games',
+        mediaType: 'image',
+        date: '2024-07-05',
+        tools: ['Photoshop'],
+        description: `For my bachelor’s project, titled “Accessible Play: Designing Board Games for Children with Visual Impairments,” I developed an inclusive board game based on qualitative user research. The game is designed to be engaging and enjoyable for both children with and without visual impairments.`,
+        cover: { kind: 'image', src: 'https://i.imgur.com/RckskLB.png' },
+        media: [
+          { kind: 'image', src: 'https://i.imgur.com/RckskLB.png', caption: 'Concept 1' },
+          { kind: 'image', src: 'https://i.imgur.com/BcvR0u6.png', caption: 'Concept 2' },
+          { kind: 'image', src: 'https://i.imgur.com/a84oRHN.png', caption: 'Concept 2' }
+        ],
+        tags: ['Game Design', 'Concept', 'Research']
+      }
 
-    // {
-    // id: 'my_new_project',
-    // title: 'My New Project',
-    // discipline: '2D Art',
-    // mediaType: 'image',
-    // date: '2025-08-13',
-    // status: ['featured'], // optional: 'playable', 'wip', etc.
-    // tools: ['Photoshop', 'Illustrator'],
-    // description: `A new illustration series created in Photoshop.<br>
-    // <a href="https://link-to-my-work.com" target="_blank" rel="noopener noreferrer">See more</a>`,
-    // cover: { kind: 'image', src: 'images/newproject/cover.webp' },
-    // media: [
-    //   { kind: 'image', src: 'images/newproject/art1.webp', caption: 'Concept 1' },
-    //   { kind: 'image', src: 'images/newproject/art2.webp', caption: 'Concept 2' }
-    // ],
-    // tags: ['Illustration', 'Concept Art', 'Portfolio']
-    // },
+      // {
+      // id: 'my_new_project',
+      // title: 'My New Project',
+      // discipline: '2D Art',
+      // mediaType: 'image',
+      // date: '2025-08-13',
+      // status: ['featured'], // optional: 'playable', 'wip', etc.
+      // tools: ['Photoshop', 'Illustrator'],
+      // description: `A new illustration series created in Photoshop.<br>
+      // <a href="https://link-to-my-work.com" target="_blank" rel="noopener noreferrer">See more</a>`,
+      // cover: { kind: 'image', src: 'images/newproject/cover.webp' },
+      // media: [
+      //   { kind: 'image', src: 'images/newproject/art1.webp', caption: 'Concept 1' },
+      //   { kind: 'image', src: 'images/newproject/art2.webp', caption: 'Concept 2' }
+      // ],
+      // tags: ['Illustration', 'Concept Art', 'Portfolio']
+      // },
 
-    
-  ];
 
-  // —— Render helpers ——
-  function makeSVG(label){
-    return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000'>
+    ];
+
+    // —— Render helpers ——
+    function makeSVG(label) {
+      return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000'>
       <defs>
         <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
           <stop offset='0%' stop-color='#1d2533'/>
@@ -908,71 +1584,86 @@ The final animation was fully animated and assembled by me in After Effects.`,
       </g>
       <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter,ui-sans-serif' font-size='72' fill='#9fb2d2' letter-spacing='1'>${label}</text>
     </svg>`;
-  }
-
-  const state = {
-    filters:{ discipline:new Set(['2D Art','2D Animation','3D','Tech Art','Games']), media:new Set(['image','video','html']) },
-    search:'', sort:'new'
-  };
-
-  const grid = document.getElementById('grid');
-  const searchEl = document.getElementById('search');
-  const sortEl = document.getElementById('sort');
-
-  // Filter listeners
-  document.querySelectorAll('input[data-filter]')?.forEach(inp=>{
-    inp.addEventListener('change', e=>{
-      const k = inp.getAttribute('data-filter');
-      if(inp.checked) state.filters[k].add(inp.value); else state.filters[k].delete(inp.value);
-      render();
-    });
-  });
-  searchEl.addEventListener('input', e=>{ state.search = e.target.value.toLowerCase(); render(); });
-  sortEl.addEventListener('change', e=>{ state.sort = e.target.value; render(); });
-
-
-  
-
-  function render(){
-    let items = PROJECTS.slice();
-    // filter by discipline
-    items = items.filter(p=> state.filters.discipline.has(p.discipline));
-    // filter by media type
-    items = items.filter(p=> state.filters.media.has(p.mediaType));
-    // search
-    if(state.search){
-      items = items.filter(p=> (p.title+" "+(p.tags||[]).join(' ')+" "+(p.tools||[]).join(' ')+" "+(p.description||'')).toLowerCase().includes(state.search));
     }
-    // sort
-    items.sort((a,b)=>{
-  // Games zuerst
-  if (a.discipline === 'Games' && b.discipline !== 'Games') return -1;
-  if (b.discipline === 'Games' && a.discipline !== 'Games') return 1;
 
-      if(state.sort==='az') return a.title.localeCompare(b.title);
-      if(state.sort==='old') return new Date(a.date)-new Date(b.date);
-      return new Date(b.date)-new Date(a.date);
+    const state = {
+      filters: { discipline: new Set(['2D Art', '2D Animation', '3D', 'Tech Art', 'Games']), media: new Set(['image', 'video', 'html']) },
+      search: '', sort: 'default'
+    };
+
+    const grid = document.getElementById('grid');
+    const searchEl = document.getElementById('search');
+    const sortEl = document.getElementById('sort');
+
+    // Filter listeners
+    document.querySelectorAll('input[data-filter]')?.forEach(inp => {
+      inp.addEventListener('change', e => {
+        const k = inp.getAttribute('data-filter');
+        if (inp.checked) state.filters[k].add(inp.value); else state.filters[k].delete(inp.value);
+        render();
+      });
     });
+    searchEl.addEventListener('input', e => { state.search = e.target.value.toLowerCase(); render(); });
+    sortEl.addEventListener('change', e => { state.sort = e.target.value; render(); });
 
-    // draw
-    grid.innerHTML = items.map(cardHTML).join('');
 
-    // attach open handlers
-    document.querySelectorAll('[data-open]')?.forEach(btn=>{
-      btn.addEventListener('click', ()=> openModal(btn.getAttribute('data-open')));
-    });
+
+
+    function render() {
+      let items = PROJECTS.slice();
+      // filter by discipline
+      items = items.filter(p => state.filters.discipline.has(p.discipline));
+      // filter by media type
+      items = items.filter(p => state.filters.media.has(p.mediaType));
+      // search
+      if (state.search) {
+        items = items.filter(p => (p.title + " " + (p.tags || []).join(' ') + " " + (p.tools || []).join(' ') + " " + (p.description || '')).toLowerCase().includes(state.search));
+      }
+      // sort
+  items.sort((a, b) => {
+  switch (state.sort) {
+    case 'az':
+      return a.title.localeCompare(b.title);
+    case 'old':
+      return new Date(a.date) - new Date(b.date);
+    case 'new': // „Newest“
+      return new Date(b.date) - new Date(a.date);
+    case 'default':
+    default:
+      // Nur im Default: Games zuerst, innerhalb nach Datum neu → alt
+      if (a.discipline === 'Games' && b.discipline !== 'Games') return -1;
+      if (b.discipline === 'Games' && a.discipline !== 'Games') return 1;
+      return new Date(b.date) - new Date(a.date);
   }
+});
 
-function cardHTML(p){
-  const cover = p.cover?.kind==='image'
-    ? `<img src="${p.cover.src}" alt="${p.title} cover"/>`
-    : `<div class='media'>${p.mediaType.toUpperCase()}</div>`;
+      // draw
+      grid.innerHTML = items.map(cardHTML).join('');
 
-  const statuses = (p.status||[]).map(s=>
-    `<span class="status ${s}">${s==='case'?'Case study':s}</span>`
-  ).join(' ');
+      // attach open handlers
+      document.querySelectorAll('[data-open]')?.forEach(btn => {
+        btn.addEventListener('click', () => openModal(btn.getAttribute('data-open')));
+      });
+    }
+    function cleanupVideos(scope) {
+      (scope || document).querySelectorAll('video').forEach(v => {
+        try { v.pause(); v.currentTime = 0; } catch { }
+        v.removeAttribute('src'); // Stoppt Streaming
+        try { v.load(); } catch { }
+      });
+    }
 
-  return `
+
+    function cardHTML(p) {
+      const cover = p.cover?.kind === 'image'
+        ? `<img src="${p.cover.src}" alt="${p.title} cover"/>`
+        : `<div class='media'>${p.mediaType.toUpperCase()}</div>`;
+
+      const statuses = (p.status || []).map(s =>
+        `<span class="status ${s}">${s === 'case' ? 'Case study' : s}</span>`
+      ).join(' ');
+
+      return `
     <article class="card" aria-labelledby="t-${p.id}" data-open="${p.id}">
       <div class="media" style="position:relative">
         ${cover}
@@ -980,10 +1671,10 @@ function cardHTML(p){
       </div>
       <div class="content">
         <h3 class="title" id="t-${p.id}">${p.title}</h3>
-        <div class="meta">${p.tools?.join(' · ')||''}</div>
+        <div class="meta">${p.tools?.join(' · ') || ''}</div>
         <div class="tags">
           ${statuses}
-          ${(p.tags||[]).map(t=>`<span class='tag'>${t}</span>`).join('')}
+          ${(p.tags || []).map(t => `<span class='tag'>${t}</span>`).join('')}
         </div>
         <div style="margin-top:12px;display:flex;gap:8px">
           <a class="btn" href="#" onclick="event.preventDefault();openModal('${p.id}')">Details</a>
@@ -991,12 +1682,12 @@ function cardHTML(p){
       </div>
     </article>
   `;
-}
+    }
 
-  // —— Modal / viewer ——
-  const modal = document.createElement('div');
-  modal.className = 'modal';
-  modal.innerHTML = `<div class='dialog'>
+    // —— Modal / viewer ——
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `<div class='dialog'>
       <div class='viewer'>
         <div id='frame' class='frame'></div>
         <div class='nav'>
@@ -1016,56 +1707,71 @@ function cardHTML(p){
         <div style='color:var(--muted);font-size:14px'>Date: <span id='dDate'></span></div>
       </aside>
     </div>`;
-  document.body.appendChild(modal);
+    document.body.appendChild(modal);
 
-  let current = { idx:0, proj:null };
+    let current = { idx: 0, proj: null };
 
-  function openModal(id){
-    const p = PROJECTS.find(x=>x.id===id);
-    if(!p) return;
-    current.proj = p; current.idx = 0;
-    modal.classList.add('open');
-    document.getElementById('dTitle').textContent = p.title;
-    document.getElementById('dDiscipline').textContent = p.discipline;
-   document.getElementById('dDesc').innerHTML = p.description || '';
+    function openModal(id) {
+      const p = PROJECTS.find(x => x.id === id);
+      if (!p) return;
+      current.proj = p; current.idx = 0;
+      modal.classList.add('open');
+      document.getElementById('dTitle').textContent = p.title;
+      document.getElementById('dDiscipline').textContent = p.discipline;
+      document.getElementById('dDesc').innerHTML = p.description || '';
 
-    document.getElementById('dDate').textContent = p.date || '';
-    document.getElementById('dTags').innerHTML = (p.tags||[]).map(t=>`<span class='tag'>${t}</span>`).join(' ');
-    drawSlide();
-  }
-
-  function drawSlide(){
-    const f = document.getElementById('frame');
-    const m = (current.proj.media && current.proj.media.length) ? current.proj.media[current.idx] : current.proj.cover;
-    if(!m){ f.innerHTML = '<div style="padding:32px;color:var(--muted)">No media</div>'; return; }
-    if(m.kind==='image'){
-      f.innerHTML = `<img src='${m.src}' alt='${current.proj.title} media ${current.idx+1}'/>`;
-    } else if(m.kind==='video'){
-      f.innerHTML = `<video controls ${m.poster?`poster='${m.poster}'`:''}><source src='${m.src}' type='video/mp4'/>Your browser does not support video.</video>`;
-    } else if(m.kind==='html'){
-      f.innerHTML = m.src; // raw embed (e.g., <iframe ...>)
+      document.getElementById('dDate').textContent = p.date || '';
+      document.getElementById('dTags').innerHTML = (p.tags || []).map(t => `<span class='tag'>${t}</span>`).join(' ');
+      drawSlide();
     }
-    document.getElementById('slideLabel').textContent = `${current.idx+1} / ${(current.proj.media||[]).length||1}`;
-  }
 
-  modal.addEventListener('click', e=>{ if(e.target===modal) modal.classList.remove('open'); });
-  modal.querySelector('#close').addEventListener('click', ()=> modal.classList.remove('open'));
-  modal.querySelector('#prev').addEventListener('click', ()=>{ if(!current.proj) return; current.idx = (current.idx-1+current.proj.media.length)%current.proj.media.length; drawSlide(); });
-  modal.querySelector('#next').addEventListener('click', ()=>{ if(!current.proj) return; current.idx = (current.idx+1)%current.proj.media.length; drawSlide(); });
+    function drawSlide() {
+      const frame = document.getElementById('frame');
+      cleanupVideos(frame);                // << vorher pausieren
+      // … dann frame.innerHTML neu setzen …
 
-  
-  // initial render
-  render();
-// ===== About-Modal: wird per JS erstellt und verkabelt =====
-(function(){
-  // 1) Modal bauen, falls nicht vorhanden
-  let aboutModal = document.getElementById('aboutModal');
-  if(!aboutModal){
-    aboutModal = document.createElement('div');
-    aboutModal.id = 'aboutModal';
-    aboutModal.className = 'modal';
-    aboutModal.style.display = 'none'; // wird per .open sichtbar
-    aboutModal.innerHTML = `
+
+      cleanupVideos(document.getElementById('frame')); // << stoppt Videos vom vorherigen Slide
+      const f = document.getElementById('frame');
+      const m = (current.proj.media && current.proj.media.length) ? current.proj.media[current.idx] : current.proj.cover;
+      if (!m) { f.innerHTML = '<div style="padding:32px;color:var(--muted)">No media</div>'; return; }
+      if (m.kind === 'image') {
+        f.innerHTML = `<img src='${m.src}' alt='${current.proj.title} media ${current.idx + 1}'/>`;
+      } else if (m.kind === 'video') {
+        f.innerHTML = `<video controls ${m.poster ? `poster='${m.poster}'` : ''}><source src='${m.src}' type='video/mp4'/>Your browser does not support video.</video>`;
+      } else if (m.kind === 'html') {
+        f.innerHTML = m.src; // raw embed (e.g., <iframe ...>)
+      }
+      document.getElementById('slideLabel').textContent = `${current.idx + 1} / ${(current.proj.media || []).length || 1}`;
+    }
+
+    function closeProjectModal() {
+      cleanupVideos(modal);                // << wichtig
+      modal.classList.remove('open');
+    }
+    document.getElementById('close').addEventListener('click', closeProjectModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeProjectModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeProjectModal(); });
+
+
+    modal.addEventListener('click', e => { if (e.target === modal) closeProjectModal(); });
+    modal.querySelector('#close').addEventListener('click', closeProjectModal);
+    modal.querySelector('#prev').addEventListener('click', () => { if (!current.proj) return; current.idx = (current.idx - 1 + current.proj.media.length) % current.proj.media.length; drawSlide(); });
+    modal.querySelector('#next').addEventListener('click', () => { if (!current.proj) return; current.idx = (current.idx + 1) % current.proj.media.length; drawSlide(); });
+
+
+    // initial render
+    render();
+    // ===== About-Modal: wird per JS erstellt und verkabelt =====
+    (function () {
+      // 1) Modal bauen, falls nicht vorhanden
+      let aboutModal = document.getElementById('aboutModal');
+      if (!aboutModal) {
+        aboutModal = document.createElement('div');
+        aboutModal.id = 'aboutModal';
+        aboutModal.className = 'modal';
+        aboutModal.style.display = 'none'; // wird per .open sichtbar
+        aboutModal.innerHTML = `
       <div class="dialog" role="dialog" aria-labelledby="aboutTitle" aria-modal="true">
        
         <aside class="details">
@@ -1073,154 +1779,157 @@ function cardHTML(p){
             <h3 id="aboutTitle" style="margin:0">About Me</h3>
             <button class="btn" id="aboutClose" aria-label="Close">✕</button>
           </div>
-          <p>Hi,hier is meine About Scetion!</p>
-          <p style="color:var(--muted);font-size:14px">München · smillapelz@gmail.com</p>
+          <p>
+I am a Munich-based designer with a Bachelor of Arts in Design, specialized in Illustration.<br>
+My work spans a wide range of creative fields: from traditional illustration to game art in 2D as well as 3D, including animation and shader design.<br><br>
+During my internship at PandaBee Studios, I contributed to several shipped games such as <i>Tilt Frog</i>, <i>Eyobi</i>, and <i>Pixel Forge</i>.<br>
+Alongside studio projects, I also develop my own games.<br>
+My Unity side-scroller <i>MushVenture</i> is playable, while my current project in Unreal Engine is still in development.<br><br>
+This mix of professional collaboration and independent creation allows me to combine strong artistic foundations with technical exploration.
+</p>
+
+<p style="color:var(--muted);font-size:14px">Munich · smillapelz@gmail.com</p>
+
         </aside>
       </div>`;
-    document.body.appendChild(aboutModal);
-  }
+        document.body.appendChild(aboutModal);
+      }
 
-  // 2) Trigger-Button finden (per ID oder Fallback über Link-Text "About")
-  const aboutBtn =
-    document.getElementById('aboutBtn') ||
-    Array.from(document.querySelectorAll('header a'))
-      .find(a => a.textContent.trim().toLowerCase() === 'about');
+      // 2) Trigger-Button finden (per ID oder Fallback über Link-Text "About")
+      const aboutBtn =
+        document.getElementById('aboutBtn') ||
+        Array.from(document.querySelectorAll('header a'))
+          .find(a => a.textContent.trim().toLowerCase() === 'about');
 
-  const aboutClose = aboutModal.querySelector('#aboutClose');
+      const aboutClose = aboutModal.querySelector('#aboutClose');
 
-  function openAbout(e){
-    if(e) e.preventDefault();
-    aboutModal.style.display = 'flex';
-    aboutModal.classList.add('open');
-  }
-  function closeAbout(){
-    aboutModal.classList.remove('open');
-    setTimeout(()=>{ aboutModal.style.display = 'none'; }, 100);
-  }
+      function openAbout(e) {
+        if (e) e.preventDefault();
+        aboutModal.style.display = 'flex';
+        aboutModal.classList.add('open');
+      }
+      function closeAbout() {
+        aboutModal.classList.remove('open');
+        setTimeout(() => { aboutModal.style.display = 'none'; }, 100);
+      }
 
-  // 3) Events
-  aboutBtn && aboutBtn.addEventListener('click', openAbout);
-  aboutClose && aboutClose.addEventListener('click', closeAbout);
-  aboutModal.addEventListener('click', e => { if(e.target === aboutModal) closeAbout(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape' && aboutModal.classList.contains('open')) closeAbout(); });
-})();
-// ===== Contact-Modal: robust (erstellt sich selbst, falls nicht vorhanden) =====
-(function(){
-  // 0) Trigger finden (id bevorzugt; Fallback: alter Link mit href="#contact")
-  const contactBtn =
-    document.getElementById('contactBtn') ||
-    Array.from(document.querySelectorAll('header a')).find(a => a.getAttribute('href') === '#contact');
+      // 3) Events
+      aboutBtn && aboutBtn.addEventListener('click', openAbout);
+      aboutClose && aboutClose.addEventListener('click', closeAbout);
+      aboutModal.addEventListener('click', e => { if (e.target === aboutModal) closeAbout(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && aboutModal.classList.contains('open')) closeAbout(); });
+    })();
+    // ===== Contact-Modal: robust (erstellt sich selbst, falls nicht vorhanden) =====
+    (function () {
+      // 0) Trigger finden (id bevorzugt; Fallback: alter Link mit href="#contact")
+      const contactBtn =
+        document.getElementById('contactBtn') ||
+        Array.from(document.querySelectorAll('header a')).find(a => a.getAttribute('href') === '#contact');
 
-  // 1) Modal anlegen, falls nicht vorhanden
-  let contactModal = document.getElementById('contactModal');
-  if(!contactModal){
-    contactModal = document.createElement('div');
-    contactModal.id = 'contactModal';
-    contactModal.className = 'modal';
-    contactModal.style.display = 'none';
-    contactModal.innerHTML = `
-      <div class="dialog" role="dialog" aria-labelledby="contactTitle" aria-modal="true">
-        <aside class="details">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px">
-            <h3 id="contactTitle" style="margin:0">Contact</h3>
-            <button class="btn" id="closeContact" aria-label="Close">✕</button>
-          </div>
-          <div class="contact-row">
-            <div class="contact-label">Email: smillapelz@gmail.com</div>
-            <div class="contact-actions">
-              <a class="btn contact" href="smillapelz@gmail.com">Write Email</a>
-              <button class="btn contact ghost" id="copyMail" data-mail="smillapelz@gmail.com">Copy</button>
+      // 1) Modal anlegen, falls nicht vorhanden
+      let contactModal = document.getElementById('contactModal');
+      if (!contactModal) {
+        contactModal = document.createElement('div');
+        contactModal.id = 'contactModal';
+        contactModal.className = 'modal';
+        contactModal.style.display = 'none';
+        contactModal.innerHTML = `
+     <div class="dialog" role="dialog" aria-labelledby="contactTitle" aria-modal="true">
+  <aside class="details">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px">
+      <h3 id="contactTitle" style="margin:0">Contact</h3>
+      <button class="btn" id="closeContact" aria-label="Close">✕</button>
+    </div>
+ <p style="margin:0 0 12px; line-height:1.4;">
+      
+      Feel free to get in touch:
+    </p>
+           <div class="contact-row">
+      <a class="btn contact" href="mailto:smillapelz@gmail.com">smillapelz@gmail.com</a>
+           
             </div>
-          </div>
-          <div class="contact-row">
-            <div class="contact-label">Links</div>
-            <div class="contact-actions">
-              <a class="btn contact" target="_blank" href="https://www.linkedin.com/in/yourprofile">LinkedIn</a>
-              <a class="btn contact" target="_blank" href="https://www.artstation.com/yourprofile">ArtStation</a>
-              <a class="btn contact" target="_blank" href="https://rosmi.itch.io/">Itch.io</a>
-            </div>
-          </div>
+          
           <p class="contact-note">Munich · CET · </p>
         </aside>
       </div>`;
-    document.body.appendChild(contactModal);
-  }
+        document.body.appendChild(contactModal);
+      }
 
-  const closeContact = contactModal.querySelector('#closeContact');
-  const copyBtn      = contactModal.querySelector('#copyMail');
+      const closeContact = contactModal.querySelector('#closeContact');
+      const copyBtn = contactModal.querySelector('#copyMail');
 
-  function openContact(e){ e && e.preventDefault(); contactModal.style.display='flex'; contactModal.classList.add('open'); }
-  function close(){ contactModal.classList.remove('open'); setTimeout(()=> contactModal.style.display='none', 100); }
+      function openContact(e) { e && e.preventDefault(); contactModal.style.display = 'flex'; contactModal.classList.add('open'); }
+      function close() { contactModal.classList.remove('open'); setTimeout(() => contactModal.style.display = 'none', 100); }
 
-  contactBtn && contactBtn.addEventListener('click', openContact);
-  closeContact && closeContact.addEventListener('click', close);
-  contactModal.addEventListener('click', e => { if(e.target === contactModal) close(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape' && contactModal.classList.contains('open')) close(); });
+      contactBtn && contactBtn.addEventListener('click', openContact);
+      closeContact && closeContact.addEventListener('click', close);
+      contactModal.addEventListener('click', e => { if (e.target === contactModal) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && contactModal.classList.contains('open')) close(); });
 
-  copyBtn && copyBtn.addEventListener('click', () => {
-    const mail = copyBtn.dataset.mail;
-    navigator.clipboard?.writeText(mail).then(()=>{
-      const old = copyBtn.textContent; copyBtn.textContent='Copied'; setTimeout(()=> copyBtn.textContent = old, 1200);
-    });
-  });
-})();
-// ===== Gallery Daten (ersetze durch deine Dateien) =====
-const GALLERY = [
-  
-  
-   { kind: 'image', src: 'https://i.imgur.com/S4XGSMX.png', title: 'Concept Art – Level Design' },
-   { kind: 'image', src: 'https://i.imgur.com/559PSST.png', title: 'Concept Art – Level Design' },
-   { kind: 'image', src: 'https://i.imgur.com/aK2pYwE.png', title: 'Concept Art – Level Design' },
-   { kind: 'image', src: 'https://i.imgur.com/wCiK4nh.png', title: 'Concept Art – Level Design' },
-     { kind: 'video', src: 'https://i.imgur.com/6qxghnH.mp4', title: 'Animation Demo' },
-        { kind: 'video', src: 'https://i.imgur.com/SdxJmi0.mp4', title: 'Animation Demo' },
-   { kind: 'image', src: 'https://i.imgur.com/KwrAxJG.png', title: 'Concept Art – Level Design' },
-   { kind: 'image', src: 'https://i.imgur.com/aT8xdcH.png', title: 'Concept Art – Level Design' },
- 
-   { kind: 'image', src: 'https://i.imgur.com/k25XgpH.png', title: 'Concept Art – Level Design' },
-   { kind: 'image', src: 'https://i.imgur.com/j8q5154.png', title: 'Concept Art – Level Design' },
- 
-  
-   { kind: 'video', src: 'https://i.imgur.com/iziAwwI.mp4', title: 'Animation Demo' },
-   { kind: 'video', src: 'https://i.imgur.com/FHJjmGV.mp4', title: 'Animation Demo' },
-   
+      copyBtn && copyBtn.addEventListener('click', () => {
+        const mail = copyBtn.dataset.mail;
+        navigator.clipboard?.writeText(mail).then(() => {
+          const old = copyBtn.textContent; copyBtn.textContent = 'Copied'; setTimeout(() => copyBtn.textContent = old, 1200);
+        });
+      });
+    })();
+    // ===== Gallery Daten (ersetze durch deine Dateien) =====
+    const GALLERY = [
 
-  // beliebig erweitern …
-];
 
-// ===== Gallery Renderer =====
-(function renderGallery(){
-  const host = document.getElementById('galleryGrid');
-  if(!host) return;
-  host.innerHTML = GALLERY.map((item,i) => {
-    if(item.kind === 'video'){
-      return `<figure class="gallery-item">
+      { kind: 'image', src: 'https://i.imgur.com/S4XGSMX.png', title: 'Concept Art – Level Design' },
+      { kind: 'image', src: 'https://i.imgur.com/559PSST.png', title: 'Concept Art – Level Design' },
+      { kind: 'image', src: 'https://i.imgur.com/aK2pYwE.png', title: 'Concept Art – Level Design' },
+      { kind: 'image', src: 'https://i.imgur.com/wCiK4nh.png', title: 'Concept Art – Level Design' },
+      { kind: 'video', src: 'https://i.imgur.com/6qxghnH.mp4', title: 'Animation Demo' },
+      { kind: 'video', src: 'https://i.imgur.com/SdxJmi0.mp4', title: 'Animation Demo' },
+      { kind: 'image', src: 'https://i.imgur.com/KwrAxJG.png', title: 'Concept Art – Level Design' },
+      { kind: 'image', src: 'https://i.imgur.com/aT8xdcH.png', title: 'Concept Art – Level Design' },
+
+      { kind: 'image', src: 'https://i.imgur.com/k25XgpH.png', title: 'Concept Art – Level Design' },
+      { kind: 'image', src: 'https://i.imgur.com/j8q5154.png', title: 'Concept Art – Level Design' },
+
+
+      { kind: 'video', src: 'https://i.imgur.com/iziAwwI.mp4', title: 'Animation Demo' },
+      { kind: 'video', src: 'https://i.imgur.com/FHJjmGV.mp4', title: 'Animation Demo' },
+
+
+      // beliebig erweitern …
+    ];
+
+    // ===== Gallery Renderer =====
+    (function renderGallery() {
+      const host = document.getElementById('galleryGrid');
+      if (!host) return;
+      host.innerHTML = GALLERY.map((item, i) => {
+        if (item.kind === 'video') {
+          return `<figure class="gallery-item">
         <video src="${item.src}" muted autoplay loop playsinline
           onclick="openLightbox(${i})"></video>
       </figure>`;
-    } else {
-      return `<figure class="gallery-item">
+        } else {
+          return `<figure class="gallery-item">
         <img src="${item.src}" loading="lazy" alt=""
           onclick="openLightbox(${i})">
       </figure>`;
-    }
-  }).join('');
-})();
+        }
+      }).join('');
+    })();
 
 
 
-// ===== Lightbox (selbst-erzeugend, wie beim About/Contact) =====
-window.openLightbox = (function(){
-  let box = null, frame = null, titleEl = null, closeBtn = null;
-  let current = 0;
+    // ===== Lightbox (selbst-erzeugend, wie beim About/Contact) =====
+    window.openLightbox = (function () {
+      let box = null, frame = null, titleEl = null, closeBtn = null;
+      let current = 0;
 
-  function ensure(){
-    if(box) return;
-    box = document.createElement('div');
-    box.id = 'lightboxModal';
-    box.className = 'modal';
-    box.style.display = 'none';
-    box.innerHTML = `
+      function ensure() {
+        if (box) return;
+        box = document.createElement('div');
+        box.id = 'lightboxModal';
+        box.className = 'modal';
+        box.style.display = 'none';
+        box.innerHTML = `
       <div class="dialog" style="max-width:90%;max-height:90%;">
         <div id="lbTitle" style="color:#fff;margin-bottom:8px;text-align:center"></div>
         <div class="frame" id="lbFrame" style="text-align:center"></div>
@@ -1230,68 +1939,76 @@ window.openLightbox = (function(){
           <button class="btn" id="lbNext">Next →</button>
         </div>
       </div>`;
-    document.body.appendChild(box);
-    frame   = box.querySelector('#lbFrame');
-    titleEl = box.querySelector('#lbTitle');
-    closeBtn= box.querySelector('#lbClose');
+        document.body.appendChild(box);
+        frame = box.querySelector('#lbFrame');
+        titleEl = box.querySelector('#lbTitle');
+        closeBtn = box.querySelector('#lbClose');
 
-    const close = ()=>{ box.classList.remove('open'); setTimeout(()=> box.style.display='none',100); };
-    closeBtn.addEventListener('click', close);
-    box.addEventListener('click', (e)=>{ if(e.target===box) close(); });
+        const close = () => {
+          cleanupVideos(box);                // <<< Videos stoppen
+          box.classList.remove('open');
+          setTimeout(() => {
+            box.style.display = 'none';
+            frame.innerHTML = '';            // <<< Inhalt komplett leeren
+          }, 100);
+        };
+        closeBtn.addEventListener('click', close);
+        box.addEventListener('click', (e) => { if (e.target === box) close(); });
 
-    // Prev/Next
-    box.querySelector('#lbPrev').addEventListener('click', ()=> show(current-1));
-    box.querySelector('#lbNext').addEventListener('click', ()=> show(current+1));
-    document.addEventListener('keydown', (e)=>{
-      if(!box.classList.contains('open')) return;
-      if(e.key==='Escape') close();
-      if(e.key==='ArrowLeft') show(current-1);
-      if(e.key==='ArrowRight') show(current+1);
+        // Prev/Next
+        box.querySelector('#lbPrev').addEventListener('click', () => show(current - 1));
+        box.querySelector('#lbNext').addEventListener('click', () => show(current + 1));
+        document.addEventListener('keydown', (e) => {
+          if (!box.classList.contains('open')) return;
+          if (e.key === 'Escape') close();
+          if (e.key === 'ArrowLeft') show(current - 1);
+          if (e.key === 'ArrowRight') show(current + 1);
+        });
+      }
+
+      function show(index) {
+        if (index < 0) index = GALLERY.length - 1;
+        if (index >= GALLERY.length) index = 0;
+        current = index;
+        const item = GALLERY[current];
+        if (item.kind === 'video') {
+          frame.innerHTML = `<video src="${item.src}" controls autoplay style="max-width:100%;max-height:80vh"></video>`;
+        } else {
+          frame.innerHTML = `<img src="${item.src}" alt="" style="max-width:100%;max-height:80vh">`;
+        }
+        titleEl.textContent = item.title || '';
+      }
+
+      return function (index) {
+        ensure();
+        show(index);
+        box.style.display = 'flex';
+        box.classList.add('open');
+      };
+    })();
+
+
+
+    document.getElementById('jumpToGallery').addEventListener('click', () => {
+      document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
     });
-  }
-
-  function show(index){
-    if(index<0) index = GALLERY.length-1;
-    if(index>=GALLERY.length) index = 0;
-    current = index;
-    const item = GALLERY[current];
-    if(item.kind==='video'){
-      frame.innerHTML = `<video src="${item.src}" controls autoplay style="max-width:100%;max-height:80vh"></video>`;
-    }else{
-      frame.innerHTML = `<img src="${item.src}" alt="" style="max-width:100%;max-height:80vh">`;
-    }
-    titleEl.textContent = item.title||'';
-  }
-
-  return function(index){
-    ensure();
-    show(index);
-    box.style.display = 'flex';
-    box.classList.add('open');
-  };
-})();
-
-
-
-document.getElementById('jumpToGallery').addEventListener('click', () => {
-  document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-});
 
 
   </script>
   <!-- About Modal -->
-<div id="aboutModal" class="modal" style="display:none">
-  <div class="dialog" role="dialog" aria-labelledby="aboutTitle" aria-modal="true">
-   
-    <aside class="details">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px">
-        <h3 id="aboutTitle" style="margin:0">About Me</h3>
-        <button class="btn" id="aboutClose" aria-label="Close">✕</button>
-      </div>
-      <p>Hi, ich bin RoSmi. 2D/3D Artist & Tech Artist … (dein Text).</p>
-    </aside>
+  <div id="aboutModal" class="modal" style="display:none">
+    <div class="dialog" role="dialog" aria-labelledby="aboutTitle" aria-modal="true">
+
+      <aside class="details">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px">
+          <h3 id="aboutTitle" style="margin:0">About Me</h3>
+          <button class="btn" id="aboutClose" aria-label="Close">✕</button>
+        </div>
+        <p></p>
+      </aside>
+    </div>
   </div>
-</div>
 
 </body>
+
 </html>
