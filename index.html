@@ -618,25 +618,20 @@
       padding: 0 20px;
     }
 
-    /* Kompakte Profilkarte mit Grid-Layout */
-    .profile-card {
-      display: grid;
-      grid-template-columns: 84px 1fr;
-      /* Bild | Text */
-      grid-template-rows: auto auto;
-      /* Zeile1: Bild+Header, Zeile2: Text */
-      column-gap: 14px;
-      row-gap: 6px;
-      align-items: center;
-      /* Header mittig zur Bildzeile */
-      max-width: 420px;
-      min-height: 220px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      background: rgba(0, 0, 0, .55);
-      border: 1px solid rgba(255, 255, 255, .15);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
-    }
+.profile-card {
+  display: grid;
+  grid-template-columns: 84px 1fr;  /* Bild | Text */
+  grid-template-rows: auto auto;    /* Zeile 1: Bild + Header, Zeile 2: Text */
+  column-gap: 14px;
+  row-gap: 14px;
+
+  max-width: 420px;
+  padding: 22px 22px;
+  border-radius: 26px;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
 
     /* H3 + P direkt als Grid-Kinder verwenden */
     .profile-overlay .about-text {
@@ -655,25 +650,25 @@
       border: 2px solid #fff;
     }
 
-    /* Header rechts vom Bild, kompakt */
-    .profile-card h3 {
-      grid-column: 2;
-      grid-row: 1;
-      margin: -40px 0 2px;
-      /* Header 5px nach oben verschoben */
-      line-height: 1.1;
-      font-size: 22px;
+/* Header rechts vom Bild */
+.profile-card h3 {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 4px;   /* normaler Abstand */
+  line-height: 1.2;
+  font-size: 22px;
+  align-self: center; /* mittig zur Bildhöhe */
+}
 
-    }
+/* Lauftext unter Bild + Header */
+.profile-card p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+  line-height: 1.5;
+  opacity: 1;
+}
 
-    /* Lauftext unter Bild + Header über volle Breite */
-    .profile-card p {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      margin: -100px 0 2px;
-      line-height: 1.25;
-      opacity: .95;
-    }
 
     /* Mobile: Karte nutzt die Breite, bleibt aber kompakt */
     @media (max-width: 640px) {
@@ -1184,6 +1179,16 @@
   color: #fff;
 }
 
+#contactModal .btn.contact {
+  background-color: #3a7bd5;
+  color: #fff;
+  border: none;
+}
+
+#contactModal .btn.contact:hover {
+  background-color: #5ca9ff;
+  color: #fff;   /* <-- Text bleibt weiß */
+}
 
   </style>
 </head>
