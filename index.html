@@ -148,7 +148,8 @@
       grid-template-columns: 1.1fr .9fr;
       gap: 24px;
       align-items: center;
-      padding: 28px 0
+      padding: 28px 0;
+      margin-bottom: 25px;  /* <-- mehr Abstand nach unten */
     }
 
     .hero .panel {
@@ -1247,16 +1248,15 @@
       <div class="row">
         <strong>Discipline</strong>
         <label class="chip"><input type="checkbox" data-filter="discipline" value="2D Art" checked>2D Art</label>
-        <label class="chip"><input type="checkbox" data-filter="discipline" value="2D Animation" checked>2D
-          Animation</label>
-        <label class="chip"><input type="checkbox" data-filter="discipline" value="3D" checked>3D</label>
+        <label class="chip"><input type="checkbox" data-filter="discipline" value="Animation" checked>Animation</label>
+        <label class="chip"><input type="checkbox" data-filter="discipline" value="3D Art" checked>3D Art</label>
         <label class="chip"><input type="checkbox" data-filter="discipline" value="Tech Art" checked>Tech Art</label>
         <label class="chip"><input type="checkbox" data-filter="discipline" value="Games" checked>Games</label>
         <span class="spacer"></span>
-        <strong>Media</strong>
+        <!-- <strong>Media</strong>
         <label class="chip"><input type="checkbox" data-filter="media" value="image" checked>Images</label>
-        <label class="chip"><input type="checkbox" data-filter="media" value="video" checked>Video</label>
-        <label class="chip"><input type="checkbox" data-filter="media" value="html" checked>Embeds</label>
+        <label class="chip"><input type="checkbox" data-filter="media" value="video" checked>Video</label> -->
+        
         <span class="spacer"></span>
         <input class="search" id="search" placeholder="Search title, tags, tools…" />
         <select id="sort">
@@ -1348,7 +1348,7 @@
       {
         id: '3d_Environment props',
         title: 'Stylized 3D Props — Crates • Walls • Nature',
-        discipline: '3D',
+        discipline: '3D Art',
         mediaType: 'image',
         date: '2025-04-30',
         tools: ['Blender', 'Unreal Engine', 'Photoshop'],
@@ -1362,7 +1362,7 @@
       {
         id: '3d_chars',
         title: '3D Characters and Animations— Gemina ',
-        discipline: '3D',
+        discipline: '3D Art',
         mediaType: 'image',
         date: '2025-04-10',
         tools: ['Blender', 'Rigify', 'Mixamo', 'Photoshop', 'Unreal Engine'],
@@ -1518,7 +1518,7 @@
       {
         id: 'sternburg',
         title: 'Sternburg - Anniversary Animation',
-        discipline: '2D Animation',
+        discipline: 'Animation',
         mediaType: 'video',
         date: '2023-01-10',
         tools: ['Photoshop', 'After Effects'],
@@ -1592,7 +1592,7 @@ The final animation was fully animated and assembled by me in After Effects.`,
     }
 
     const state = {
-      filters: { discipline: new Set(['2D Art', '2D Animation', '3D', 'Tech Art', 'Games']), media: new Set(['image', 'video', 'html']) },
+      filters: { discipline: new Set(['2D Art', 'Animation', '3D Art', 'Tech Art', 'Games']), media: new Set(['image', 'video']) },
       search: '', sort: 'default'
     };
 
