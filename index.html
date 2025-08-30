@@ -151,7 +151,8 @@
       gap: 24px;
       align-items: center;
       padding: 28px 0;
-      margin-bottom: 25px;  /* <-- mehr Abstand nach unten */
+      margin-bottom: 25px;
+      /* <-- mehr Abstand nach unten */
     }
 
     .hero .panel {
@@ -621,20 +622,22 @@
       padding: 0 20px;
     }
 
-.profile-card {
-  display: grid;
-  grid-template-columns: 84px 1fr;  /* Bild | Text */
-  grid-template-rows: auto auto;    /* Zeile 1: Bild + Header, Zeile 2: Text */
-  column-gap: 14px;
-  row-gap: 14px;
+    .profile-card {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      /* Bild | Text */
+      grid-template-rows: auto auto;
+      /* Zeile 1: Bild + Header, Zeile 2: Text */
+      column-gap: 14px;
+      row-gap: 14px;
 
-  max-width: 420px;
-  padding: 22px 22px;
-  border-radius: 26px;
-  background: rgba(0, 0, 0, 0.75);
-  border: 1px solid rgba(255,255,255,.15);
-  box-shadow: 0 8px 24px rgba(0,0,0,.35);
-}
+      max-width: 420px;
+      padding: 22px 22px;
+      border-radius: 26px;
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, .15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    }
 
     /* H3 + P direkt als Grid-Kinder verwenden */
     .profile-overlay .about-text {
@@ -653,24 +656,26 @@
       border: 2px solid #fff;
     }
 
-/* Header rechts vom Bild */
-.profile-card h3 {
-  grid-column: 2;
-  grid-row: 1;
-  margin: 0 0 4px;   /* normaler Abstand */
-  line-height: 1.2;
-  font-size: 22px;
-  align-self: center; /* mittig zur Bildhöhe */
-}
+    /* Header rechts vom Bild */
+    .profile-card h3 {
+      grid-column: 2;
+      grid-row: 1;
+      margin: 0 0 4px;
+      /* normaler Abstand */
+      line-height: 1.2;
+      font-size: 22px;
+      align-self: center;
+      /* mittig zur Bildhöhe */
+    }
 
-/* Lauftext unter Bild + Header */
-.profile-card p {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  margin: 0;
-  line-height: 1.5;
-  opacity: 1;
-}
+    /* Lauftext unter Bild + Header */
+    .profile-card p {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      margin: 0;
+      line-height: 1.5;
+      opacity: 1;
+    }
 
 
     /* Mobile: Karte nutzt die Breite, bleibt aber kompakt */
@@ -1058,141 +1063,171 @@
     }
 
     /* === About-Modal kompakt machen === */
-#aboutModal .dialog {
-  display: block;           /* normales Block-Layout, kein Grid */
-  width: auto;              /* passt sich Inhalt an */
-  max-width: 700px;         /* optional: Begrenzung für gute Lesbarkeit */
-  height: auto;             /* Höhe nur so groß wie Text */
-  max-height: 90vh;         /* aber nicht höher als Bildschirm */
-  overflow: auto;           /* falls Text doch mal sehr lang ist */
-  padding: 24px;
-}
-/* === Contact-Modal kompakt machen === */
-#contactModal .dialog {
-  display: block;           /* normales Block-Layout */
-  width: auto; 
-  min-width: 500px;             /* passt sich Inhalt an */
-  max-width: 500px;         /* etwas schmaler, da weniger Text */
-  height: auto;  
-  min-height: 20vh;            /* Höhe nur so groß wie Inhalt */
-  max-height: 80vh;         /* falls Inhalt mal größer wird */
-  overflow: auto;           /* scrollt, wenn zu voll */
-  padding: 24px;
-}
+    #aboutModal .dialog {
+      display: block;
+      /* normales Block-Layout, kein Grid */
+      width: auto;
+      /* passt sich Inhalt an */
+      max-width: 700px;
+      /* optional: Begrenzung für gute Lesbarkeit */
+      height: auto;
+      /* Höhe nur so groß wie Text */
+      max-height: 90vh;
+      /* aber nicht höher als Bildschirm */
+      overflow: auto;
+      /* falls Text doch mal sehr lang ist */
+      padding: 24px;
+    }
 
-/* === Close-Buttons in About/Contact besser sichtbar === */
-#aboutModal .btn,
-#contactModal .btn {
-  background: transparent;       /* kein Block hinterlegt */
-  color: #fff;                   /* weißer Text */
-  font-size: 20px;               /* etwas größer */
-  border: none;                  /* ohne Rand */
-  cursor: pointer;
-}
+    /* === Contact-Modal kompakt machen === */
+    #contactModal .dialog {
+      display: block;
+      /* normales Block-Layout */
+      width: auto;
+      min-width: 500px;
+      /* passt sich Inhalt an */
+      max-width: 500px;
+      /* etwas schmaler, da weniger Text */
+      height: auto;
+      min-height: 20vh;
+      /* Höhe nur so groß wie Inhalt */
+      max-height: 80vh;
+      /* falls Inhalt mal größer wird */
+      overflow: auto;
+      /* scrollt, wenn zu voll */
+      padding: 24px;
+    }
 
-#aboutModal .btn:hover,
-#contactModal .btn:hover {
-  color: #5ca9ff;                /* hellblau beim Hover */
-}
+    /* === Close-Buttons in About/Contact besser sichtbar === */
+    #aboutModal .btn,
+    #contactModal .btn {
+      background: transparent;
+      /* kein Block hinterlegt */
+      color: #fff;
+      /* weißer Text */
+      font-size: 20px;
+      /* etwas größer */
+      border: none;
+      /* ohne Rand */
+      cursor: pointer;
+    }
 
-/* === Close-Button im Projekt-Modal sichtbar machen === */
-/* Projekt-Modal: Close-Button sichtbar machen */
-.modal .details button#close{
-  background: rgba(0,0,0,.6);
-  color:#fff;
-  border:none;
-  font-size:18px;
-  line-height:1;
-  padding:6px 10px;
-  border-radius:8px;
-}
-.modal .details button#close:hover{
-  background:#5ca9ff;
-  color:#fff;
-}
-/* Dialog als Bezugspunkt */
-.modal .dialog{ position: relative; }
+    #aboutModal .btn:hover,
+    #contactModal .btn:hover {
+      color: #5ca9ff;
+      /* hellblau beim Hover */
+    }
 
-/* Close schwebend */
-.modal .details button#close{
-  position:absolute;
-  top:12px; right:12px;
-  width:32px; height:32px;
-  border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-}
-/* === Einheitlicher Close-Button für alle Modals === */
-.modal .dialog {
-  position: relative; /* Bezugspunkt für den schwebenden Button */
-}
+    /* === Close-Button im Projekt-Modal sichtbar machen === */
+    /* Projekt-Modal: Close-Button sichtbar machen */
+    .modal .details button#close {
+      background: rgba(0, 0, 0, .6);
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      line-height: 1;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
 
-.modal .dialog button#close,
-#aboutModal .dialog button#closeAbout,
-#contactModal .dialog button#closeContact {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  font-size: 18px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  line-height: 1;
-}
+    .modal .details button#close:hover {
+      background: #5ca9ff;
+      color: #fff;
+    }
 
-.modal .dialog button#close:hover,
-#aboutModal .dialog button#closeAbout:hover,
-#contactModal .dialog button#closeContact:hover {
-  background: #5ca9ff;
-  color: #fff;
-}
-/* === Einheitlicher Close-Button für alle Modals === */
-.modal .dialog {
-  position: relative; /* Bezugspunkt für den schwebenden Button */
-}
+    /* Dialog als Bezugspunkt */
+    .modal .dialog {
+      position: relative;
+    }
 
-.modal .dialog button[aria-label="Close"] {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  font-size: 18px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  line-height: 1;
-}
+    /* Close schwebend */
+    .modal .details button#close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.modal .dialog button[aria-label="Close"]:hover {
-  background: #5ca9ff;
-  color: #fff;
-}
+    /* === Einheitlicher Close-Button für alle Modals === */
+    .modal .dialog {
+      position: relative;
+      /* Bezugspunkt für den schwebenden Button */
+    }
 
-#contactModal .btn.contact {
-  background-color: #3a7bd5;
-  color: #fff;
-  border: none;
-}
+    .modal .dialog button#close,
+    #aboutModal .dialog button#closeAbout,
+    #contactModal .dialog button#closeContact {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      line-height: 1;
+    }
 
-#contactModal .btn.contact:hover {
-  background-color: #5ca9ff;
-  color: #fff;   /* <-- Text bleibt weiß */
-}
+    .modal .dialog button#close:hover,
+    #aboutModal .dialog button#closeAbout:hover,
+    #contactModal .dialog button#closeContact:hover {
+      background: #5ca9ff;
+      color: #fff;
+    }
 
+    /* === Einheitlicher Close-Button für alle Modals === */
+    .modal .dialog {
+      position: relative;
+      /* Bezugspunkt für den schwebenden Button */
+    }
+
+    .modal .dialog button[aria-label="Close"] {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      line-height: 1;
+    }
+
+    .modal .dialog button[aria-label="Close"]:hover {
+      background: #5ca9ff;
+      color: #fff;
+    }
+
+    #contactModal .btn.contact {
+      background-color: #3a7bd5;
+      color: #fff;
+      border: none;
+    }
+
+    #contactModal .btn.contact:hover {
+      background-color: #5ca9ff;
+      color: #fff;
+      /* <-- Text bleibt weiß */
+    }
   </style>
 </head>
 
@@ -1258,7 +1293,7 @@
         <!-- <strong>Media</strong>
         <label class="chip"><input type="checkbox" data-filter="media" value="image" checked>Images</label>
         <label class="chip"><input type="checkbox" data-filter="media" value="video" checked>Video</label> -->
-        
+
         <span class="spacer"></span>
         <input class="search" id="search" placeholder="Search title, tags, tools…" />
         <select id="sort">
@@ -1402,7 +1437,7 @@
         date: '2023-06-23',
         tools: ['Photoshop'],
         description: 'Storyboard created for a university course',
-        cover: { kind: 'image', src: 'https://i.imgur.com/q7UreHa.png' },
+        cover: { kind: 'image', src: '' },
         media: [
           { kind: 'image', src: 'https://i.imgur.com/JsC5PE0.png' },
           { kind: 'image', src: 'https://i.imgur.com/JlKhtpM.png' },
@@ -1428,11 +1463,11 @@
         date: '2023-06-22',
         tools: ['Photoshop'],
         description: '"Kämpfen und Hoffen" ("Fighting and Hoping") is a comic created for the University Newspaper.<br> The story explores themes of pride, resilience, and queer history, highlighting the struggles and hopes of LGBTQ+ communities across generations.<br> Through expressive characters and visual storytelling, the comic connects personal identity with broader historical moments, aiming to both educate and inspire.<br> My role covered concept development, illustration, and final comic production.',
-        cover: { kind: 'image', src: 'https://i.imgur.com/GfPQhfM.png' },
+        cover: { kind: 'image', src: 'images/projects/Comic/MutariCover.png' },
         media: [
-          { kind: 'image', src: 'https://i.imgur.com/LuwIBzb.png' },
-          { kind: 'image', src: 'https://i.imgur.com/gUipJqr.png' },
-          { kind: 'image', src: 'https://i.imgur.com/OyoBF4T.png' },
+          { kind: 'image', src: 'images/projects/Comic/Mutari12.png' },
+          { kind: 'image', src: 'images/projects/Comic/Mutari34.png' },
+          { kind: 'image', src: 'images/projects/Comic/Mutari56.png' },
 
 
 
@@ -1627,22 +1662,22 @@ The final animation was fully animated and assembled by me in After Effects.`,
         items = items.filter(p => (p.title + " " + (p.tags || []).join(' ') + " " + (p.tools || []).join(' ') + " " + (p.description || '')).toLowerCase().includes(state.search));
       }
       // sort
-  items.sort((a, b) => {
-  switch (state.sort) {
-    case 'az':
-      return a.title.localeCompare(b.title);
-    case 'old':
-      return new Date(a.date) - new Date(b.date);
-    case 'new': // „Newest“
-      return new Date(b.date) - new Date(a.date);
-    case 'default':
-    default:
-      // Nur im Default: Games zuerst, innerhalb nach Datum neu → alt
-      if (a.discipline === 'Games' && b.discipline !== 'Games') return -1;
-      if (b.discipline === 'Games' && a.discipline !== 'Games') return 1;
-      return new Date(b.date) - new Date(a.date);
-  }
-});
+      items.sort((a, b) => {
+        switch (state.sort) {
+          case 'az':
+            return a.title.localeCompare(b.title);
+          case 'old':
+            return new Date(a.date) - new Date(b.date);
+          case 'new': // „Newest“
+            return new Date(b.date) - new Date(a.date);
+          case 'default':
+          default:
+            // Nur im Default: Games zuerst, innerhalb nach Datum neu → alt
+            if (a.discipline === 'Games' && b.discipline !== 'Games') return -1;
+            if (b.discipline === 'Games' && a.discipline !== 'Games') return 1;
+            return new Date(b.date) - new Date(a.date);
+        }
+      });
 
       // draw
       grid.innerHTML = items.map(cardHTML).join('');
